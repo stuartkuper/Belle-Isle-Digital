@@ -1,0 +1,1583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>James River Digital — Web Design for Local Businesses</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:       #0d2545;
+      --navy-mid:   #163a6b;
+      --navy-light: #1e4d8c;
+      --teal:       #0a7c6e;
+      --teal-mid:   #0d9e8d;
+      --teal-light: #12c4af;
+      --accent:     #10b8a2;
+      --green-soft: #e6f7f5;
+      --blue-soft:  #edf2fa;
+      --white:      #ffffff;
+      --off-white:  #f8fafc;
+      --gray-100:   #f1f5f9;
+      --gray-200:   #e2e8f0;
+      --gray-400:   #94a3b8;
+      --gray-500:   #64748b;
+      --gray-700:   #334155;
+      --gray-900:   #0f172a;
+      --font-sans:  'Inter', system-ui, sans-serif;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --shadow-sm:  0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.05);
+      --shadow-md:  0 4px 16px rgba(0,0,0,.10), 0 2px 6px rgba(0,0,0,.06);
+      --shadow-lg:  0 10px 40px rgba(0,0,0,.12), 0 4px 12px rgba(0,0,0,.07);
+      --radius:     10px;
+      --radius-lg:  18px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-sans);
+      color: var(--gray-700);
+      background: var(--white);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: 100%;
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── Buttons ── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-sans);
+      font-size: .9375rem;
+      font-weight: 600;
+      letter-spacing: .01em;
+      border-radius: 50px;
+      padding: 14px 32px;
+      cursor: pointer;
+      border: none;
+      transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+    }
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--teal), var(--teal-mid));
+      color: var(--white);
+      box-shadow: 0 4px 18px rgba(10,124,110,.35);
+    }
+    .btn-primary:hover { box-shadow: 0 8px 28px rgba(10,124,110,.45); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 2px solid rgba(255,255,255,.55);
+    }
+    .btn-outline:hover { background: rgba(255,255,255,.1); border-color: var(--white); }
+
+    .btn-dark {
+      background: var(--navy);
+      color: var(--white);
+      box-shadow: var(--shadow-md);
+    }
+    .btn-dark:hover { background: var(--navy-mid); box-shadow: var(--shadow-lg); }
+
+    /* ── Section Titles ── */
+    .section-label {
+      display: inline-block;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.85rem, 3.5vw, 2.6rem);
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .section-subtitle {
+      font-size: 1.0625rem;
+      color: var(--gray-500);
+      max-width: 560px;
+      line-height: 1.7;
+    }
+
+    /* ═══════════════════════════════════════
+       HEADER / NAV
+    ═══════════════════════════════════════ */
+    #header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      transition: background .25s ease, box-shadow .25s ease, padding .25s ease;
+      padding: 20px 0;
+    }
+    #header.scrolled {
+      background: rgba(13, 37, 69, .97);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 2px 20px rgba(0,0,0,.18);
+      padding: 14px 0;
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-mark {
+      width: 38px; height: 38px;
+      background: linear-gradient(135deg, var(--teal), var(--teal-mid));
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .logo-mark svg { width: 20px; height: 20px; }
+
+    .logo-text {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.1;
+    }
+    .logo-text span { display: block; font-family: var(--font-sans); font-size: .65rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--teal-light); margin-top: 1px; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: .875rem;
+      font-weight: 500;
+      color: rgba(255,255,255,.8);
+      letter-spacing: .01em;
+      transition: color .15s;
+    }
+    .nav-links a:hover { color: var(--white); }
+
+    .nav-cta { margin-left: 8px; }
+    .nav-cta .btn { padding: 10px 22px; font-size: .875rem; }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: .25s;
+    }
+
+    /* ═══════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════ */
+    #hero {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(140deg, var(--navy) 0%, var(--navy-mid) 55%, #0d5c54 100%);
+      padding: 160px 0 110px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+    }
+
+    /* Decorative background shapes */
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 800px 600px at 70% 40%, rgba(10,124,110,.18) 0%, transparent 70%),
+        radial-gradient(ellipse 500px 400px at 20% 80%, rgba(18,196,175,.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 60px;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 50px;
+      padding: 6px 16px;
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      color: var(--teal-light);
+      margin-bottom: 28px;
+    }
+    .hero-tag::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--teal-light);
+      flex-shrink: 0;
+    }
+
+    .hero-headline {
+      font-family: var(--font-serif);
+      font-size: clamp(2.4rem, 5vw, 3.75rem);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 22px;
+      letter-spacing: -.01em;
+    }
+
+    .hero-headline em {
+      font-style: normal;
+      background: linear-gradient(90deg, var(--teal-light), #4edfd0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,.72);
+      line-height: 1.75;
+      max-width: 480px;
+      margin-bottom: 38px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .hero-trust {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 52px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255,255,255,.1);
+    }
+    .trust-avatars {
+      display: flex;
+    }
+    .trust-avatars span {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      border: 2px solid var(--navy);
+      background: var(--teal-mid);
+      margin-left: -8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .65rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+    .trust-avatars span:first-child { margin-left: 0; }
+    .trust-text { font-size: .8125rem; color: rgba(255,255,255,.65); line-height: 1.4; }
+    .trust-text strong { color: var(--white); }
+
+    /* Hero visual / mockup card */
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .mockup-card {
+      background: var(--white);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 30px 80px rgba(0,0,0,.35), 0 8px 24px rgba(0,0,0,.2);
+      width: 100%;
+      max-width: 420px;
+      transform: perspective(900px) rotateY(-5deg) rotateX(3deg);
+      transition: transform .4s ease;
+    }
+    .mockup-card:hover { transform: perspective(900px) rotateY(-2deg) rotateX(1deg); }
+
+    .mockup-bar {
+      background: var(--gray-100);
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .mockup-bar span {
+      width: 10px; height: 10px; border-radius: 50%;
+    }
+    .mockup-bar span:nth-child(1) { background: #ff5f57; }
+    .mockup-bar span:nth-child(2) { background: #febc2e; }
+    .mockup-bar span:nth-child(3) { background: #28c840; }
+    .mockup-url {
+      margin-left: 10px;
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 4px;
+      padding: 3px 10px;
+      font-size: .7rem;
+      color: var(--gray-500);
+      flex: 1;
+    }
+
+    .mockup-body { padding: 0; }
+
+    .mockup-hero-block {
+      background: linear-gradient(120deg, var(--navy), var(--teal));
+      padding: 28px 24px 22px;
+    }
+    .mockup-hero-block .mh-tag { width: 80px; height: 8px; background: rgba(255,255,255,.25); border-radius: 4px; margin-bottom: 12px; }
+    .mockup-hero-block .mh-h1 { width: 70%; height: 16px; background: rgba(255,255,255,.9); border-radius: 4px; margin-bottom: 8px; }
+    .mockup-hero-block .mh-h2 { width: 55%; height: 16px; background: rgba(255,255,255,.9); border-radius: 4px; margin-bottom: 14px; }
+    .mockup-hero-block .mh-sub { width: 90%; height: 6px; background: rgba(255,255,255,.35); border-radius: 3px; margin-bottom: 6px; }
+    .mockup-hero-block .mh-sub2 { width: 75%; height: 6px; background: rgba(255,255,255,.35); border-radius: 3px; margin-bottom: 18px; }
+    .mockup-hero-block .mh-btn { width: 100px; height: 28px; background: var(--teal-light); border-radius: 50px; }
+
+    .mockup-content { padding: 20px 24px; }
+    .mockup-row { display: flex; gap: 10px; margin-bottom: 12px; }
+    .mockup-card-sm {
+      flex: 1;
+      background: var(--gray-100);
+      border-radius: 8px;
+      padding: 12px;
+    }
+    .mc-icon { width: 22px; height: 22px; background: var(--teal-mid); border-radius: 5px; margin-bottom: 8px; opacity: .8; }
+    .mc-line { height: 5px; background: var(--gray-200); border-radius: 3px; margin-bottom: 5px; }
+    .mc-line.short { width: 60%; }
+
+    .floating-badge {
+      position: absolute;
+      background: var(--white);
+      border-radius: 12px;
+      padding: 12px 16px;
+      box-shadow: 0 8px 30px rgba(0,0,0,.15);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .badge-1 { bottom: -20px; left: -30px; }
+    .badge-2 { top: -16px; right: -20px; }
+
+    .badge-icon {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .badge-icon.green { background: var(--green-soft); }
+    .badge-icon.blue  { background: var(--blue-soft); }
+    .badge-icon svg { width: 18px; height: 18px; }
+
+    .badge-text { font-size: .75rem; line-height: 1.3; }
+    .badge-text strong { display: block; font-size: .8125rem; color: var(--navy); }
+    .badge-text span { color: var(--gray-500); }
+
+    /* ═══════════════════════════════════════
+       SERVICES
+    ═══════════════════════════════════════ */
+    #services {
+      padding: 100px 0;
+      background: var(--off-white);
+    }
+
+    .services-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .services-header .section-subtitle { margin: 0 auto; }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .service-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 40px 36px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--gray-200);
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--teal), var(--teal-mid));
+      opacity: 0;
+      transition: opacity .25s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+      border-color: transparent;
+    }
+    .service-card:hover::before { opacity: 1; }
+
+    .service-icon {
+      width: 54px; height: 54px;
+      border-radius: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      background: var(--green-soft);
+    }
+    .service-icon svg { width: 26px; height: 26px; }
+
+    .service-card h3 {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 12px;
+      line-height: 1.25;
+    }
+
+    .service-card p {
+      font-size: .9375rem;
+      color: var(--gray-500);
+      line-height: 1.7;
+    }
+
+    .service-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 22px;
+      font-size: .875rem;
+      font-weight: 600;
+      color: var(--teal);
+      transition: gap .15s;
+    }
+    .service-link:hover { gap: 10px; }
+    .service-link svg { width: 16px; height: 16px; }
+
+    /* ═══════════════════════════════════════
+       WHY US
+    ═══════════════════════════════════════ */
+    #why-us {
+      padding: 100px 0;
+      background: var(--white);
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .why-content .section-subtitle { margin-bottom: 40px; }
+
+    .why-items { display: flex; flex-direction: column; gap: 28px; }
+
+    .why-item {
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+    }
+
+    .why-item-icon {
+      width: 46px; height: 46px;
+      flex-shrink: 0;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--teal), var(--teal-mid));
+      display: flex; align-items: center; justify-content: center;
+    }
+    .why-item-icon svg { width: 22px; height: 22px; color: var(--white); }
+
+    .why-item h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 5px;
+    }
+    .why-item p {
+      font-size: .9rem;
+      color: var(--gray-500);
+      line-height: 1.65;
+    }
+
+    /* Stats panel */
+    .why-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .stat-card {
+      background: var(--off-white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: 32px 28px;
+      text-align: center;
+      transition: box-shadow .2s;
+    }
+    .stat-card:hover { box-shadow: var(--shadow-md); }
+
+    .stat-card.accent {
+      background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+      border-color: transparent;
+    }
+    .stat-card.accent .stat-num,
+    .stat-card.accent .stat-label { color: var(--white); }
+    .stat-card.accent .stat-label { opacity: .7; }
+
+    .stat-num {
+      font-family: var(--font-serif);
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-num span { color: var(--teal); }
+
+    .stat-label {
+      font-size: .8125rem;
+      font-weight: 500;
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    /* ═══════════════════════════════════════
+       PORTFOLIO / WORK
+    ═══════════════════════════════════════ */
+    #work {
+      padding: 100px 0;
+      background: var(--off-white);
+    }
+
+    .work-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 52px;
+      gap: 24px;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .portfolio-item {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--white);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--gray-200);
+      transition: transform .25s ease, box-shadow .25s ease;
+      cursor: pointer;
+    }
+    .portfolio-item:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+
+    .portfolio-thumb {
+      aspect-ratio: 4/3;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .thumb-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .thumb-p1 { background: linear-gradient(135deg, #0d2545 0%, #1e4d8c 60%, #0d9e8d 100%); }
+    .thumb-p2 { background: linear-gradient(135deg, #0a4d44 0%, #0a7c6e 60%, #12c4af 100%); }
+    .thumb-p3 { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%); }
+    .thumb-p4 { background: linear-gradient(135deg, #2d1b69 0%, #11998e 100%); }
+    .thumb-p5 { background: linear-gradient(135deg, #134e5e 0%, #71b280 100%); }
+    .thumb-p6 { background: linear-gradient(135deg, #0d2545 0%, #0a7c6e 100%); }
+
+    .thumb-placeholder svg { width: 36px; height: 36px; color: rgba(255,255,255,.3); }
+
+    .thumb-mock {
+      width: 80%;
+    }
+    .tm-nav { height: 8px; background: rgba(255,255,255,.2); border-radius: 4px; margin-bottom: 14px; }
+    .tm-hero { height: 40px; background: rgba(255,255,255,.12); border-radius: 6px; margin-bottom: 10px; }
+    .tm-row { display: flex; gap: 6px; }
+    .tm-card { flex: 1; height: 28px; background: rgba(255,255,255,.1); border-radius: 5px; }
+
+    .portfolio-hover-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(13, 37, 69, .75);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity .25s;
+    }
+    .portfolio-item:hover .portfolio-hover-overlay { opacity: 1; }
+
+    .overlay-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--white);
+      font-size: .875rem;
+      font-weight: 600;
+      border: 2px solid rgba(255,255,255,.6);
+      border-radius: 50px;
+      padding: 8px 20px;
+    }
+
+    .portfolio-info { padding: 20px 22px; }
+    .portfolio-info .tag {
+      display: inline-block;
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      color: var(--teal);
+      background: var(--green-soft);
+      border-radius: 50px;
+      padding: 3px 10px;
+      margin-bottom: 8px;
+    }
+    .portfolio-info h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+    .portfolio-info p { font-size: .85rem; color: var(--gray-400); }
+
+    /* ═══════════════════════════════════════
+       CONTACT
+    ═══════════════════════════════════════ */
+    #contact {
+      padding: 100px 0;
+      background: linear-gradient(140deg, var(--navy) 0%, var(--navy-mid) 55%, #0d5c54 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    #contact::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 700px 500px at 80% 50%, rgba(10,124,110,.2) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .contact-copy .section-label { color: var(--teal-light); }
+    .contact-copy .section-title { color: var(--white); }
+    .contact-copy .section-subtitle { color: rgba(255,255,255,.65); margin-bottom: 40px; }
+
+    .contact-details { display: flex; flex-direction: column; gap: 18px; }
+
+    .contact-detail {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .cd-icon {
+      width: 42px; height: 42px;
+      border-radius: 10px;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.15);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .cd-icon svg { width: 18px; height: 18px; color: var(--teal-light); }
+    .cd-text { font-size: .9375rem; color: rgba(255,255,255,.85); }
+    .cd-text strong { display: block; font-size: .75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .07em; color: rgba(255,255,255,.45); margin-bottom: 1px; }
+
+    /* Contact form */
+    .contact-form {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 44px 40px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.25);
+    }
+
+    .contact-form h3 {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+    .contact-form p {
+      font-size: .875rem;
+      color: var(--gray-500);
+      margin-bottom: 28px;
+    }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+    .form-group { margin-bottom: 16px; }
+
+    .form-group label {
+      display: block;
+      font-size: .8125rem;
+      font-weight: 600;
+      color: var(--gray-700);
+      margin-bottom: 6px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid var(--gray-200);
+      border-radius: 8px;
+      font-family: var(--font-sans);
+      font-size: .9rem;
+      color: var(--gray-900);
+      background: var(--white);
+      transition: border-color .15s, box-shadow .15s;
+      outline: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(10,124,110,.12);
+    }
+    .form-group textarea { resize: vertical; min-height: 90px; }
+
+    .form-submit { width: 100%; justify-content: center; border-radius: 8px; margin-top: 4px; }
+
+    /* ═══════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════ */
+    #footer {
+      background: var(--gray-900);
+      padding: 60px 0 0;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 52px;
+      border-bottom: 1px solid rgba(255,255,255,.07);
+    }
+
+    .footer-brand p {
+      font-size: .875rem;
+      color: rgba(255,255,255,.45);
+      line-height: 1.7;
+      margin-top: 16px;
+      max-width: 260px;
+    }
+
+    .footer-social { display: flex; gap: 10px; margin-top: 22px; }
+
+    .social-btn {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.1);
+      display: flex; align-items: center; justify-content: center;
+      transition: background .15s;
+    }
+    .social-btn:hover { background: rgba(255,255,255,.15); }
+    .social-btn svg { width: 16px; height: 16px; color: rgba(255,255,255,.7); }
+
+    .footer-col h4 {
+      font-size: .8125rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: rgba(255,255,255,.5);
+      margin-bottom: 16px;
+    }
+
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+
+    .footer-col ul a {
+      font-size: .875rem;
+      color: rgba(255,255,255,.55);
+      transition: color .15s;
+    }
+    .footer-col ul a:hover { color: var(--white); }
+
+    .footer-bottom {
+      padding: 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .footer-bottom p { font-size: .8125rem; color: rgba(255,255,255,.3); }
+    .footer-bottom a { color: rgba(255,255,255,.45); transition: color .15s; }
+    .footer-bottom a:hover { color: var(--white); }
+
+    /* ═══════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      .hero-grid { gap: 40px; }
+      .why-grid { gap: 48px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+    }
+
+    @media (max-width: 860px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-visual { display: none; }
+
+      .services-grid { grid-template-columns: 1fr; }
+      .why-grid { grid-template-columns: 1fr; }
+      .why-stats { display: none; }
+      .portfolio-grid { grid-template-columns: 1fr 1fr; }
+      .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+      .work-header { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (max-width: 580px) {
+      #hero { padding: 120px 0 80px; }
+      .portfolio-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .form-row { grid-template-columns: 1fr; }
+      .contact-form { padding: 28px 22px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════
+     HEADER
+════════════════════════════ -->
+<header id="header">
+  <div class="container">
+    <nav class="nav-inner">
+
+      <a href="#" class="logo" aria-label="James River Digital home">
+        <div class="logo-mark">
+          <!-- River wave icon -->
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 14c2-2 4-2 6 0s4 2 6 0 4-2 6 0" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M2 9c2-2 4-2 6 0s4 2 6 0 4-2 6 0" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-opacity="0.6"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          James River Digital
+          <span>Web Design Agency</span>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#why-us">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <div class="nav-cta">
+        <a href="#contact" class="btn btn-primary">Get a Free Quote</a>
+      </div>
+
+      <button class="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+
+    </nav>
+  </div>
+</header>
+
+
+<!-- ════════════════════════════
+     HERO
+════════════════════════════ -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-grid">
+
+      <!-- Copy -->
+      <div class="hero-content">
+        <div class="hero-tag">Richmond, Virginia — Local Web Design</div>
+
+        <h1 class="hero-headline">
+          Your Business Deserves a&nbsp;<em>Website&nbsp;That&nbsp;Works</em>
+        </h1>
+
+        <p class="hero-sub">
+          We help local businesses across the Richmond area get a professional online presence — built from scratch, redesigned for growth, or maintained so you never have to think about it.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-primary">
+            <!-- Arrow icon -->
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Start a Project
+          </a>
+          <a href="#work" class="btn btn-outline">See Our Work</a>
+        </div>
+
+        <div class="hero-trust">
+          <div class="trust-avatars">
+            <span>LP</span>
+            <span>MK</span>
+            <span>RH</span>
+            <span>JC</span>
+          </div>
+          <p class="trust-text"><strong>Trusted by local business owners</strong><br>from restaurants to law firms to boutique shops</p>
+        </div>
+      </div>
+
+      <!-- Visual -->
+      <div class="hero-visual">
+        <div style="position:relative; width:100%; max-width:440px;">
+          <div class="mockup-card">
+            <div class="mockup-bar">
+              <span></span><span></span><span></span>
+              <div class="mockup-url">yourlocalbusiness.com</div>
+            </div>
+            <div class="mockup-body">
+              <div class="mockup-hero-block">
+                <div class="mh-tag"></div>
+                <div class="mh-h1"></div>
+                <div class="mh-h2"></div>
+                <div class="mh-sub"></div>
+                <div class="mh-sub2"></div>
+                <div class="mh-btn"></div>
+              </div>
+              <div class="mockup-content">
+                <div class="mockup-row">
+                  <div class="mockup-card-sm">
+                    <div class="mc-icon"></div>
+                    <div class="mc-line"></div>
+                    <div class="mc-line short"></div>
+                  </div>
+                  <div class="mockup-card-sm">
+                    <div class="mc-icon"></div>
+                    <div class="mc-line"></div>
+                    <div class="mc-line short"></div>
+                  </div>
+                  <div class="mockup-card-sm">
+                    <div class="mc-icon"></div>
+                    <div class="mc-line"></div>
+                    <div class="mc-line short"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Floating badge 1 -->
+          <div class="floating-badge badge-1">
+            <div class="badge-icon green">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#0a7c6e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="badge-text">
+              <strong>Launched on time</strong>
+              <span>2-week turnaround</span>
+            </div>
+          </div>
+
+          <!-- Floating badge 2 -->
+          <div class="floating-badge badge-2">
+            <div class="badge-icon blue">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="#163a6b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="badge-text">
+              <strong>5-star rated</strong>
+              <span>Local clients</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════
+     SERVICES
+════════════════════════════ -->
+<section id="services">
+  <div class="container">
+
+    <div class="services-header">
+      <span class="section-label">What We Do</span>
+      <h2 class="section-title">Services Built for Local Business</h2>
+      <p class="section-subtitle">Whether you're starting from zero, ready for a refresh, or just need someone to keep things running — we've got you covered.</p>
+    </div>
+
+    <div class="services-grid">
+
+      <!-- Service 1 -->
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="3" width="20" height="14" rx="2" stroke="#0a7c6e" stroke-width="2"/>
+            <path d="M8 21h8M12 17v4" stroke="#0a7c6e" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>Website Design &amp; Build</h3>
+        <p>We design and build professional websites from the ground up — custom-crafted to represent your brand and convert visitors into customers. Fast, mobile-friendly, and built to last.</p>
+        <a href="#contact" class="service-link">
+          Start a new site
+          <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <!-- Service 2 -->
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 4l16 16M4 20L20 4" stroke="#0a7c6e" stroke-width="2" stroke-linecap="round" opacity="0"/>
+            <path d="M12 3a9 9 0 1 1 0 18A9 9 0 0 1 12 3z" stroke="#0a7c6e" stroke-width="2"/>
+            <path d="M12 8v4l3 3" stroke="#0a7c6e" stroke-width="2" stroke-linecap="round"/>
+            <path d="M16.5 7.5A6 6 0 0 0 7 16l2-2" stroke="#0a7c6e" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>Website Redesigns</h3>
+        <p>Already have a site that feels dated or isn't bringing in business? We'll modernize it — keeping your brand while transforming the look, feel, and performance to meet today's standards.</p>
+        <a href="#contact" class="service-link">
+          Refresh your site
+          <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <!-- Service 3 -->
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z" stroke="#0a7c6e" stroke-width="2"/>
+            <path d="M12 6v6l4 2" stroke="#0a7c6e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3>Ongoing Maintenance &amp; Updates</h3>
+        <p>Your website isn't a one-and-done project. We offer ongoing plans to keep your site secure, updated, and current — so you can focus on running your business, not managing a website.</p>
+        <a href="#contact" class="service-link">
+          Learn about plans
+          <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════
+     WHY US
+════════════════════════════ -->
+<section id="why-us">
+  <div class="container">
+    <div class="why-grid">
+
+      <!-- Content -->
+      <div class="why-content">
+        <span class="section-label">Why James River Digital</span>
+        <h2 class="section-title">The Agency Feel — Without the Agency Runaround</h2>
+        <p class="section-subtitle">Big agencies have big overhead — and they treat small businesses like small accounts. We're local, lean, and genuinely invested in your success.</p>
+
+        <div class="why-items">
+
+          <div class="why-item">
+            <div class="why-item-icon">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div>
+              <h4>Fast, Honest Turnaround</h4>
+              <p>Most projects are live within two weeks. No disappearing acts, no vague timelines — just clear milestones and a site you can be proud of, delivered on schedule.</p>
+            </div>
+          </div>
+
+          <div class="why-item">
+            <div class="why-item-icon">
+              <svg viewBox="0 0 24 24" fill="none"><rect x="2" y="3" width="20" height="14" rx="2" stroke="white" stroke-width="2"/><path d="M8 21h8M12 17v4" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+            <div>
+              <h4>Modern, Professional Design</h4>
+              <p>We don't use templates or cookie-cutter layouts. Every site is designed with intention — clean, modern, and built to reflect the quality of your business.</p>
+            </div>
+          </div>
+
+          <div class="why-item">
+            <div class="why-item-icon">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="white" stroke-width="2" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="white" stroke-width="2"/><path d="M23 21v-2a4 4 0 0 0-3-3.87" stroke="white" stroke-width="2" stroke-linecap="round"/><path d="M16 3.13a4 4 0 0 1 0 7.75" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+            <div>
+              <h4>Local, Personal Service</h4>
+              <p>You'll work directly with the person building your site — not a ticket system, not a junior account manager. We're your neighbors, and we're here when you need us.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="why-stats">
+        <div class="stat-card accent">
+          <div class="stat-num">2<span>wk</span></div>
+          <div class="stat-label">Avg. Launch Time</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" style="color:var(--teal);">1:1</div>
+          <div class="stat-label">Direct Developer Access</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">Local<span style="color:var(--teal); font-size:1.5rem;">.</span></div>
+          <div class="stat-label">Richmond Based</div>
+        </div>
+        <div class="stat-card accent">
+          <div class="stat-num">No<span style="font-size:1.5rem;"></span></div>
+          <div class="stat-label">Lock-in Contracts</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════
+     WORK / PORTFOLIO
+════════════════════════════ -->
+<section id="work">
+  <div class="container">
+
+    <div class="work-header">
+      <div>
+        <span class="section-label">Our Work</span>
+        <h2 class="section-title">Projects We're Proud Of</h2>
+        <p class="section-subtitle">A sample of recent work for local businesses across the Richmond area.</p>
+      </div>
+      <a href="#contact" class="btn btn-dark">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Start Your Project
+      </a>
+    </div>
+
+    <div class="portfolio-grid">
+
+      <!-- Project 1 -->
+      <div class="portfolio-item">
+        <div class="portfolio-thumb">
+          <div class="thumb-placeholder thumb-p1">
+            <div class="thumb-mock">
+              <div class="tm-nav"></div>
+              <div class="tm-hero"></div>
+              <div class="tm-row"><div class="tm-card"></div><div class="tm-card"></div><div class="tm-card"></div></div>
+            </div>
+          </div>
+          <div class="portfolio-hover-overlay">
+            <span class="overlay-label">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              View Project
+            </span>
+          </div>
+        </div>
+        <div class="portfolio-info">
+          <span class="tag">Restaurant</span>
+          <h3>The Richmond Table</h3>
+          <p>Menu, reservations &amp; brand redesign</p>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="portfolio-item">
+        <div class="portfolio-thumb">
+          <div class="thumb-placeholder thumb-p2">
+            <div class="thumb-mock">
+              <div class="tm-nav"></div>
+              <div class="tm-hero"></div>
+              <div class="tm-row"><div class="tm-card"></div><div class="tm-card"></div></div>
+            </div>
+          </div>
+          <div class="portfolio-hover-overlay">
+            <span class="overlay-label">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              View Project
+            </span>
+          </div>
+        </div>
+        <div class="portfolio-info">
+          <span class="tag">Law Firm</span>
+          <h3>Hargrove &amp; Associates</h3>
+          <p>Professional site &amp; lead generation</p>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="portfolio-item">
+        <div class="portfolio-thumb">
+          <div class="thumb-placeholder thumb-p3">
+            <div class="thumb-mock">
+              <div class="tm-nav"></div>
+              <div class="tm-hero"></div>
+              <div class="tm-row"><div class="tm-card"></div><div class="tm-card"></div><div class="tm-card"></div></div>
+            </div>
+          </div>
+          <div class="portfolio-hover-overlay">
+            <span class="overlay-label">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              View Project
+            </span>
+          </div>
+        </div>
+        <div class="portfolio-info">
+          <span class="tag">Retail</span>
+          <h3>Carytown Candle Co.</h3>
+          <p>E-commerce &amp; product photography</p>
+        </div>
+      </div>
+
+      <!-- Project 4 -->
+      <div class="portfolio-item">
+        <div class="portfolio-thumb">
+          <div class="thumb-placeholder thumb-p4">
+            <div class="thumb-mock">
+              <div class="tm-nav"></div>
+              <div class="tm-hero"></div>
+              <div class="tm-row"><div class="tm-card"></div><div class="tm-card"></div></div>
+            </div>
+          </div>
+          <div class="portfolio-hover-overlay">
+            <span class="overlay-label">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              View Project
+            </span>
+          </div>
+        </div>
+        <div class="portfolio-info">
+          <span class="tag">Home Services</span>
+          <h3>River City Remodeling</h3>
+          <p>New site, quote calculator &amp; reviews</p>
+        </div>
+      </div>
+
+      <!-- Project 5 -->
+      <div class="portfolio-item">
+        <div class="portfolio-thumb">
+          <div class="thumb-placeholder thumb-p5">
+            <div class="thumb-mock">
+              <div class="tm-nav"></div>
+              <div class="tm-hero"></div>
+              <div class="tm-row"><div class="tm-card"></div><div class="tm-card"></div><div class="tm-card"></div></div>
+            </div>
+          </div>
+          <div class="portfolio-hover-overlay">
+            <span class="overlay-label">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              View Project
+            </span>
+          </div>
+        </div>
+        <div class="portfolio-info">
+          <span class="tag">Health &amp; Wellness</span>
+          <h3>Fan District Fitness</h3>
+          <p>Class booking &amp; membership portal</p>
+        </div>
+      </div>
+
+      <!-- Project 6 — "Yours" CTA card -->
+      <div class="portfolio-item" style="background: linear-gradient(135deg, var(--navy), var(--navy-mid)); border-color: transparent; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding: 40px 28px; min-height:240px;">
+        <div style="width:54px;height:54px;border-radius:50%;background:rgba(255,255,255,.1);border:2px dashed rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;margin-bottom:18px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg>
+        </div>
+        <h3 style="font-family:var(--font-serif);font-size:1.1rem;font-weight:700;color:var(--white);margin-bottom:8px;">Your Business Here</h3>
+        <p style="font-size:.875rem;color:rgba(255,255,255,.6);margin-bottom:22px;line-height:1.6;">Ready to build something you're proud of?</p>
+        <a href="#contact" class="btn btn-primary" style="font-size:.85rem;padding:10px 22px;">Let's Talk</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════
+     CONTACT
+════════════════════════════ -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-inner">
+
+      <!-- Copy -->
+      <div class="contact-copy">
+        <span class="section-label">Get in Touch</span>
+        <h2 class="section-title">Let's Build Something Together</h2>
+        <p class="section-subtitle">Have a project in mind? We'd love to hear about your business and talk through how we can help. No pressure, no jargon — just a real conversation.</p>
+
+        <div class="contact-details">
+          <div class="contact-detail">
+            <div class="cd-icon">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="2"/><path d="M22 6l-10 7L2 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+            <div class="cd-text">
+              <strong>Email</strong>
+              stuartkuper@gmail.com
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="cd-icon">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 11.61 19a19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-2.93-8.24A2 2 0 0 1 4.68 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="2"/></svg>
+            </div>
+            <div class="cd-text">
+              <strong>Phone</strong>
+              (804) 931-4620
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="cd-icon">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2"/></svg>
+            </div>
+            <div class="cd-text">
+              <strong>Location</strong>
+              Richmond, Virginia
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <div class="contact-form">
+        <h3>Request a Free Consultation</h3>
+        <p>Tell us a bit about your project and we'll be in touch within one business day.</p>
+
+        <form action="https://formspree.io/f/xdarzajg" method="POST">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fname">First Name</label>
+              <input type="text" id="fname" name="first_name" placeholder="Jane" required />
+            </div>
+            <div class="form-group">
+              <label for="lname">Last Name</label>
+              <input type="text" id="lname" name="last_name" placeholder="Doe" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="jane@yourbusiness.com" required />
+          </div>
+          <div class="form-group">
+            <label for="biz">Business Name</label>
+            <input type="text" id="biz" name="business_name" placeholder="Your Business" />
+          </div>
+          <div class="form-group">
+            <label for="service">What do you need?</label>
+            <select id="service" name="service">
+              <option value="">Select a service…</option>
+              <option>New Website Design &amp; Build</option>
+              <option>Website Redesign</option>
+              <option>Ongoing Maintenance &amp; Updates</option>
+              <option>Not sure yet — let's talk</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Tell us about your project</label>
+            <textarea id="message" name="message" placeholder="A little context about your business and what you're looking for…"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary form-submit">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Send My Request
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════
+     FOOTER
+════════════════════════════ -->
+<footer id="footer">
+  <div class="container">
+    <div class="footer-grid">
+
+      <!-- Brand -->
+      <div class="footer-brand">
+        <a href="#" class="logo">
+          <div class="logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 14c2-2 4-2 6 0s4 2 6 0 4-2 6 0" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+              <path d="M2 9c2-2 4-2 6 0s4 2 6 0 4-2 6 0" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-opacity="0.6"/>
+            </svg>
+          </div>
+          <div class="logo-text">
+            James River Digital
+            <span>Web Design Agency</span>
+          </div>
+        </a>
+        <p>Professional web design for local businesses in Richmond and the surrounding area. We build clean, modern websites that help your business grow.</p>
+        <div class="footer-social">
+          <!-- LinkedIn -->
+          <a href="#" class="social-btn" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/><circle cx="4" cy="4" r="2" stroke="currentColor" stroke-width="1.75"/></svg>
+          </a>
+          <!-- Facebook -->
+          <a href="#" class="social-btn" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <!-- Instagram -->
+          <a href="#" class="social-btn" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.75"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.75"/><circle cx="17.5" cy="6.5" r=".75" fill="currentColor"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Services -->
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Website Design &amp; Build</a></li>
+          <li><a href="#services">Website Redesigns</a></li>
+          <li><a href="#services">Maintenance &amp; Updates</a></li>
+          <li><a href="#contact">Free Consultation</a></li>
+        </ul>
+      </div>
+
+      <!-- Company -->
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#why-us">About Us</a></li>
+          <li><a href="#work">Our Work</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:stuartkuper@gmail.com">stuartkuper@gmail.com</a></li>
+          <li><a href="tel:+18045550192">(804) 931-4620</a></li>
+          <li><a href="#contact">Richmond, Virginia</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 James River Digital. All rights reserved.</p>
+      <p>
+        <a href="#">Privacy Policy</a> &nbsp;&middot;&nbsp;
+        <a href="#">Terms of Service</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ════════════════════════════
+     JAVASCRIPT
+════════════════════════════ -->
+<script>
+  // Sticky header scroll effect
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 50);
+  }, { passive: true });
+
+  // Active nav link on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navLinks.forEach(link => {
+          link.style.color = link.getAttribute('href') === `#${id}`
+            ? 'white'
+            : 'rgba(255,255,255,.75)';
+        });
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+
+  // Smooth scroll for all anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        const offset = 80;
+        const top = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+
+
+</script>
+
+</body>
+</html>
