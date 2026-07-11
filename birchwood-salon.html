@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Birchwood Salon &mdash; Hair Salon in Richmond, Virginia</title>
+<meta name="description" content="Birchwood Salon is a boutique hair salon in Richmond, Virginia offering cuts, color, treatments, and bridal styling in a bright, welcoming space.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream:   #faf7f2;
+    --ivory:   #f3ede4;
+    --sand:    #e9ddce;
+    --blush:   #e7d3c8;
+    --blush-2: #f1e2da;
+    --accent:  #b6836b;   /* soft terracotta */
+    --accent-d:#9c6a53;
+    --sage:    #9aa596;
+    --ink:     #38332e;    /* warm charcoal */
+    --muted:   #8c837a;
+    --line:    #e5dccf;
+    --gold:    #b08d57;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Jost", system-ui, sans-serif;
+    color: var(--ink);
+    background: var(--cream);
+    line-height: 1.7;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, .serif { font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600; line-height: 1.1; }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+
+  .wrap { width: 100%; max-width: 1160px; margin: 0 auto; padding: 0 32px; }
+
+  .eyebrow {
+    font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.32em;
+    color: var(--accent); font-weight: 500;
+  }
+
+  .btn {
+    display: inline-block; font-family: "Jost", sans-serif; font-weight: 400;
+    font-size: 13.5px; text-transform: uppercase; letter-spacing: 0.18em;
+    padding: 16px 34px; cursor: pointer; transition: background .2s, color .2s, border-color .2s;
+    border: 1px solid transparent;
+  }
+  .btn-solid { background: var(--ink); color: var(--cream); }
+  .btn-solid:hover { background: var(--accent-d); }
+  .btn-outline { background: transparent; color: var(--ink); border-color: var(--ink); }
+  .btn-outline:hover { background: var(--ink); color: var(--cream); }
+  .btn-light { background: var(--cream); color: var(--ink); }
+  .btn-light:hover { background: var(--accent); color: var(--cream); }
+
+  /* ---------- Header ---------- */
+  header {
+    position: sticky; top: 0; z-index: 60;
+    background: rgba(250,247,242,0.9); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 84px; }
+  .brand { display: flex; flex-direction: column; line-height: 1; }
+  .brand .b1 { font-family: "Cormorant Garamond", serif; font-weight: 700; font-size: 27px; letter-spacing: 0.02em; }
+  .brand .b2 { font-size: 10px; text-transform: uppercase; letter-spacing: 0.42em; color: var(--muted); margin-top: 5px; }
+  .nav-links { display: flex; align-items: center; gap: 40px; list-style: none; }
+  .nav-links a { font-size: 13px; text-transform: uppercase; letter-spacing: 0.16em; font-weight: 400; color: var(--ink); position: relative; padding: 4px 0; }
+  .nav-links a::after { content: ""; position: absolute; left: 0; bottom: 0; width: 0; height: 1px; background: var(--accent); transition: width .25s; }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-book .btn { padding: 12px 26px; }
+  .menu-btn { display: none; background: none; border: none; font-size: 24px; cursor: pointer; color: var(--ink); }
+
+  .mobile-menu { display: none; background: var(--ivory); border-bottom: 1px solid var(--line); }
+  .mobile-menu.open { display: block; }
+  .mobile-menu a { display: block; padding: 16px 32px; border-bottom: 1px solid var(--line); text-transform: uppercase; letter-spacing: 0.14em; font-size: 13px; }
+
+  /* ---------- Hero ---------- */
+  .hero { background: linear-gradient(180deg, var(--cream), var(--ivory)); overflow: hidden; }
+  .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; padding: 90px 0 100px; }
+  .hero-copy .eyebrow { margin-bottom: 22px; display: block; }
+  .hero-copy h1 { font-size: 68px; font-weight: 600; letter-spacing: -0.01em; }
+  .hero-copy h1 em { font-style: italic; color: var(--accent); }
+  .hero-copy .lead { font-size: 18px; color: var(--muted); margin-top: 24px; max-width: 440px; font-weight: 300; }
+  .hero-actions { margin-top: 38px; display: flex; gap: 16px; flex-wrap: wrap; }
+  .hero-note { margin-top: 34px; font-size: 13px; letter-spacing: 0.06em; color: var(--muted); text-transform: uppercase; }
+  .hero-note b { color: var(--ink); font-weight: 500; }
+
+  .hero-visual { position: relative; }
+  .hero-visual .frame {
+    position: relative; z-index: 2; aspect-ratio: 4 / 5;
+    background-color: var(--blush); background-size: cover; background-position: center top;
+    border: 8px solid var(--cream); box-shadow: 0 30px 60px rgba(56,51,46,0.16);
+  }
+  .hero-visual::before {
+    content: ""; position: absolute; z-index: 1; right: -24px; top: 40px; bottom: 40px; left: 60px;
+    background: var(--blush-2); border: 1px solid var(--line);
+  }
+
+  /* ---------- Section scaffolding ---------- */
+  section { padding: 104px 0; }
+  .center { text-align: center; }
+  .sec-head { max-width: 620px; margin-bottom: 60px; }
+  .sec-head.center { margin-left: auto; margin-right: auto; }
+  .sec-head .eyebrow { display: block; margin-bottom: 16px; }
+  .sec-head h2 { font-size: 44px; }
+  .sec-head p { color: var(--muted); font-size: 17px; margin-top: 14px; font-weight: 300; }
+  .divider { width: 46px; height: 1px; background: var(--accent); margin: 18px 0 0; }
+  .center .divider { margin-left: auto; margin-right: auto; }
+
+  /* ---------- Services / pricing ---------- */
+  #services { background: var(--cream); }
+  .price-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 56px 72px; }
+  .price-group h3 { font-size: 26px; margin-bottom: 6px; }
+  .price-group .gtag { font-size: 12px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--accent); }
+  .price-group ul { list-style: none; margin-top: 20px; }
+  .price-row { display: flex; align-items: baseline; gap: 12px; padding: 13px 0; border-bottom: 1px solid var(--line); }
+  .price-row .name { font-size: 16px; font-weight: 400; }
+  .price-row .name small { display: block; font-size: 12.5px; color: var(--muted); letter-spacing: 0.02em; }
+  .price-row .dots { flex: 1; border-bottom: 1px dotted #cdbfae; transform: translateY(-3px); }
+  .price-row .price { font-family: "Cormorant Garamond", serif; font-size: 22px; font-weight: 600; color: var(--accent-d); white-space: nowrap; }
+  .price-foot { margin-top: 48px; text-align: center; font-size: 14px; color: var(--muted); font-style: italic; font-family: "Cormorant Garamond", serif; font-size: 19px; }
+
+  /* ---------- Quote band ---------- */
+  .band {
+    background-color: var(--ink); color: var(--cream);
+    background-image: linear-gradient(rgba(40,35,31,0.55), rgba(40,35,31,0.62)),
+      url("https://images.unsplash.com/photo-1600948836101-f9ffda59d250?auto=format&fit=crop&w=1600&q=70");
+    background-size: cover; background-position: center;
+    text-align: center; padding: 120px 0;
+  }
+  .band .q { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 38px; font-weight: 500; max-width: 780px; margin: 0 auto; line-height: 1.3; }
+  .band .who { margin-top: 26px; font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.28em; color: var(--blush); }
+
+  /* ---------- About ---------- */
+  #about { background: var(--ivory); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+  .about-img { position: relative; }
+  .about-img .pic { aspect-ratio: 5 / 6; background-color: var(--sand); background-size: cover; background-position: center; border: 8px solid var(--cream); box-shadow: 0 24px 50px rgba(56,51,46,0.14); }
+  .about-img .est { position: absolute; right: -18px; bottom: -18px; background: var(--accent); color: var(--cream); text-align: center; width: 118px; height: 118px; border-radius: 50%; display: grid; place-content: center; box-shadow: 0 12px 24px rgba(56,51,46,0.2); }
+  .about-img .est .n { font-family: "Cormorant Garamond", serif; font-size: 34px; line-height: 1; }
+  .about-img .est .l { font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.2em; margin-top: 4px; }
+  .about-copy h2 { font-size: 44px; }
+  .about-copy p { color: var(--muted); font-size: 16.5px; margin-top: 18px; font-weight: 300; }
+  .about-stats { display: flex; gap: 44px; margin-top: 36px; }
+  .about-stats .s .n { font-family: "Cormorant Garamond", serif; font-size: 40px; color: var(--accent-d); line-height: 1; }
+  .about-stats .s .l { font-size: 12px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted); margin-top: 6px; }
+
+  /* ---------- Stylists ---------- */
+  #stylists { background: var(--cream); }
+  .team { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px; }
+  .stylist { text-align: center; }
+  .stylist .avatar {
+    width: 130px; height: 130px; border-radius: 50%; margin: 0 auto 22px;
+    display: grid; place-content: center; font-family: "Cormorant Garamond", serif;
+    font-size: 46px; color: var(--cream); border: 1px solid rgba(0,0,0,0.05);
+    box-shadow: 0 14px 30px rgba(56,51,46,0.12);
+  }
+  .stylist:nth-child(1) .avatar { background: var(--accent); }
+  .stylist:nth-child(2) .avatar { background: var(--sage); }
+  .stylist:nth-child(3) .avatar { background: #c8a58c; }
+  .stylist h3 { font-size: 25px; }
+  .stylist .role { font-size: 12px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--accent); margin-top: 4px; }
+  .stylist p { color: var(--muted); font-size: 15px; margin-top: 14px; padding: 0 6px; font-weight: 300; }
+
+  /* ---------- Contact / booking ---------- */
+  #contact { background: var(--ivory); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1.05fr; gap: 64px; align-items: start; }
+  .contact-copy h2 { font-size: 44px; }
+  .contact-copy > p { color: var(--muted); font-size: 16.5px; margin-top: 16px; font-weight: 300; max-width: 420px; }
+  .cdetails { margin-top: 36px; display: grid; gap: 22px; }
+  .cd { display: flex; gap: 16px; align-items: flex-start; }
+  .cd .ic { width: 42px; height: 42px; flex: none; border-radius: 50%; background: var(--blush-2); color: var(--accent-d); display: grid; place-items: center; font-size: 17px; }
+  .cd .k { font-size: 11px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--muted); }
+  .cd .v { font-size: 16.5px; font-weight: 400; }
+  .hours-box { margin-top: 30px; background: var(--cream); border: 1px solid var(--line); padding: 22px 26px; }
+  .hours-box h4 { font-family: "Cormorant Garamond", serif; font-size: 21px; margin-bottom: 12px; }
+  .hours-box .hr { display: flex; justify-content: space-between; font-size: 14.5px; padding: 5px 0; color: var(--muted); }
+  .hours-box .hr b { color: var(--ink); font-weight: 400; }
+
+  form.booking { background: var(--cream); border: 1px solid var(--line); padding: 40px; box-shadow: 0 20px 50px rgba(56,51,46,0.07); }
+  form.booking h3 { font-size: 28px; margin-bottom: 4px; }
+  form.booking .fsub { color: var(--muted); font-size: 14.5px; margin-bottom: 26px; }
+  .brow { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .bg { margin-bottom: 18px; }
+  .bg label { display: block; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted); margin-bottom: 7px; }
+  .bg input, .bg select, .bg textarea {
+    width: 100%; padding: 13px 15px; border: 1px solid var(--line); background: var(--cream);
+    font-family: "Jost", sans-serif; font-size: 15px; font-weight: 300; color: var(--ink); border-radius: 2px;
+  }
+  .bg input:focus, .bg select:focus, .bg textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(182,131,107,0.12); }
+  .bg textarea { resize: vertical; min-height: 90px; }
+  form.booking .btn-solid { width: 100%; }
+
+  /* ---------- Footer ---------- */
+  footer { background: var(--ink); color: #cdbfb2; }
+  .foot { padding: 60px 0 34px; display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 40px; }
+  .foot .b1 { font-family: "Cormorant Garamond", serif; font-size: 28px; font-weight: 700; color: var(--cream); }
+  .foot .b2 { font-size: 10px; text-transform: uppercase; letter-spacing: 0.4em; color: var(--accent); margin-top: 6px; }
+  .foot p { font-size: 14.5px; margin-top: 18px; max-width: 280px; color: #b7a99c; font-weight: 300; }
+  .foot h5 { font-family: "Jost", sans-serif; font-size: 12px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--cream); margin-bottom: 16px; font-weight: 500; }
+  .foot ul { list-style: none; display: grid; gap: 9px; }
+  .foot ul a, .foot ul li { font-size: 14.5px; color: #b7a99c; }
+  .foot ul a:hover { color: var(--cream); }
+  .foot-bottom { border-top: 1px solid #4a443d; padding: 22px 0; text-align: center; font-size: 12.5px; letter-spacing: 0.05em; color: #94897c; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 940px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 56px; }
+    .hero-visual { max-width: 440px; }
+    .hero-copy h1 { font-size: 54px; }
+    .price-cols { grid-template-columns: 1fr; gap: 44px; }
+    .about-grid { grid-template-columns: 1fr; gap: 56px; }
+    .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+    .team { grid-template-columns: 1fr; max-width: 360px; margin: 0 auto; gap: 44px; }
+  }
+  @media (max-width: 680px) {
+    .nav-links, .nav-book { display: none; }
+    .menu-btn { display: block; }
+    .hero-copy h1 { font-size: 44px; }
+    .sec-head h2, .about-copy h2, .contact-copy h2 { font-size: 34px; }
+    .band .q { font-size: 27px; }
+    .brow { grid-template-columns: 1fr; }
+    section { padding: 72px 0; }
+    .band { padding: 84px 0; }
+    form.booking { padding: 28px 22px; }
+    .about-stats { gap: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="brand">
+      <span class="b1">Birchwood</span>
+      <span class="b2">Salon &middot; Richmond</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#stylists">Stylists</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-book"><a href="#contact" class="btn btn-solid">Book Now</a></div>
+    <button class="menu-btn" aria-label="Menu" onclick="document.getElementById('mm').classList.toggle('open')">&#9776;</button>
+  </div>
+  <nav class="mobile-menu" id="mm">
+    <a href="#services" onclick="document.getElementById('mm').classList.remove('open')">Services</a>
+    <a href="#about" onclick="document.getElementById('mm').classList.remove('open')">About</a>
+    <a href="#stylists" onclick="document.getElementById('mm').classList.remove('open')">Stylists</a>
+    <a href="#contact" onclick="document.getElementById('mm').classList.remove('open')">Contact</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">Boutique Hair Salon &middot; Richmond, VA</span>
+        <h1>Where beautiful hair <em>begins</em>.</h1>
+        <p class="lead">A bright, welcoming studio in the heart of Richmond, dedicated to cuts, color, and care that bring out your natural best.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-solid">Book an Appointment</a>
+          <a href="#services" class="btn btn-outline">View Services</a>
+        </div>
+        <p class="hero-note"><b>Walk-ins welcome</b> &nbsp;&middot;&nbsp; Tue&ndash;Sat</p>
+      </div>
+      <div class="hero-visual">
+        <div class="frame" style="background-image:url('https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&w=900&q=75')"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services / pricing -->
+  <section id="services">
+    <div class="wrap">
+      <div class="sec-head center">
+        <span class="eyebrow">Services &amp; Pricing</span>
+        <h2>Thoughtful, tailored, and always transparent</h2>
+        <p>Every appointment begins with a consultation. Pricing starts at the rates below and may vary with hair length, density, and time.</p>
+      </div>
+
+      <div class="price-cols">
+        <div class="price-group">
+          <span class="gtag">01</span>
+          <h3>Cuts &amp; Styling</h3>
+          <ul>
+            <li class="price-row"><span class="name">Women's Cut &amp; Style</span><span class="dots"></span><span class="price">$65+</span></li>
+            <li class="price-row"><span class="name">Men's Cut</span><span class="dots"></span><span class="price">$40+</span></li>
+            <li class="price-row"><span class="name">Blowout &amp; Style</span><span class="dots"></span><span class="price">$50+</span></li>
+            <li class="price-row"><span class="name">Special Occasion Updo</span><span class="dots"></span><span class="price">$85+</span></li>
+          </ul>
+        </div>
+
+        <div class="price-group">
+          <span class="gtag">02</span>
+          <h3>Color</h3>
+          <ul>
+            <li class="price-row"><span class="name">Root Touch-Up</span><span class="dots"></span><span class="price">$75+</span></li>
+            <li class="price-row"><span class="name">All-Over Color</span><span class="dots"></span><span class="price">$110+</span></li>
+            <li class="price-row"><span class="name">Partial Highlights</span><span class="dots"></span><span class="price">$130+</span></li>
+            <li class="price-row"><span class="name">Full Balayage</span><span class="dots"></span><span class="price">$185+</span></li>
+          </ul>
+        </div>
+
+        <div class="price-group">
+          <span class="gtag">03</span>
+          <h3>Treatments</h3>
+          <ul>
+            <li class="price-row"><span class="name">Deep Conditioning</span><span class="dots"></span><span class="price">$35+</span></li>
+            <li class="price-row"><span class="name">Gloss &amp; Shine</span><span class="dots"></span><span class="price">$45+</span></li>
+            <li class="price-row"><span class="name">Keratin Smoothing</span><span class="dots"></span><span class="price">$220+</span></li>
+            <li class="price-row"><span class="name">Scalp &amp; Wellness Ritual</span><span class="dots"></span><span class="price">$55+</span></li>
+          </ul>
+        </div>
+
+        <div class="price-group">
+          <span class="gtag">04</span>
+          <h3>Bridal &amp; Events</h3>
+          <ul>
+            <li class="price-row"><span class="name">Bridal Trial</span><span class="dots"></span><span class="price">$95+</span></li>
+            <li class="price-row"><span class="name">Bridal Day Styling</span><span class="dots"></span><span class="price">$140+</span></li>
+            <li class="price-row"><span class="name">Bridesmaid Styling</span><span class="dots"></span><span class="price">$75+</span></li>
+            <li class="price-row"><span class="name">On-Location <small>Travel by quote</small></span><span class="dots"></span><span class="price">Inquire</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="price-foot">Not sure what you need? Book a complimentary 15-minute consultation and we'll guide you.</p>
+    </div>
+  </section>
+
+  <!-- Quote band -->
+  <section class="band">
+    <div class="wrap">
+      <p class="q">&ldquo;We believe a great salon visit should feel like a small luxury &mdash; unhurried, personal, and just for you.&rdquo;</p>
+      <p class="who">The Birchwood Philosophy</p>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="wrap about-grid">
+      <div class="about-img">
+        <div class="pic" style="background-image:url('https://images.unsplash.com/photo-1633681926022-84c23e8cb2d6?auto=format&fit=crop&w=900&q=75')"></div>
+        <div class="est"><span class="n">2016</span><span class="l">Established</span></div>
+      </div>
+      <div class="about-copy">
+        <span class="eyebrow">Our Story</span>
+        <div class="divider"></div>
+        <h2>A little studio with a lot of heart</h2>
+        <p>Birchwood Salon opened its doors in 2016 with a simple idea: create a calm, light-filled space where every guest feels genuinely cared for. No rush, no pressure &mdash; just skilled hands and honest advice.</p>
+        <p>Tucked into a quiet corner of Richmond, our boutique team keeps things small on purpose. That means more time with your stylist, a look built around you, and results you'll actually want to recreate at home.</p>
+        <div class="about-stats">
+          <div class="s"><div class="n">9</div><div class="l">Years Serving<br>Richmond</div></div>
+          <div class="s"><div class="n">3</div><div class="l">Master<br>Stylists</div></div>
+          <div class="s"><div class="n">5&#9733;</div><div class="l">Guest<br>Rated</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stylists -->
+  <section id="stylists">
+    <div class="wrap">
+      <div class="sec-head center">
+        <span class="eyebrow">Meet the Team</span>
+        <h2>The hands behind the chair</h2>
+        <p>A close-knit team of stylists who love what they do &mdash; and who'll take the time to get to know your hair.</p>
+      </div>
+      <div class="team">
+        <div class="stylist">
+          <div class="avatar">M</div>
+          <h3>Maya Ellison</h3>
+          <div class="role">Owner &amp; Master Stylist</div>
+          <p>Founder of Birchwood, Maya specializes in lived-in color and balayage that grows out beautifully.</p>
+        </div>
+        <div class="stylist">
+          <div class="avatar">J</div>
+          <h3>Jordan Reyes</h3>
+          <div class="role">Senior Stylist</div>
+          <p>A precision-cut expert with an eye for texture, curls, and effortless everyday styling.</p>
+        </div>
+        <div class="stylist">
+          <div class="avatar">S</div>
+          <h3>Sofia Nguyen</h3>
+          <div class="role">Color &amp; Bridal Specialist</div>
+          <p>Sofia lives for special occasions &mdash; blondes, glosses, and updos made for the moment.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact / booking -->
+  <section id="contact">
+    <div class="wrap contact-grid">
+      <div class="contact-copy">
+        <span class="eyebrow">Visit &amp; Book</span>
+        <div class="divider"></div>
+        <h2>Come say hello</h2>
+        <p>Book online any time, or reach out and we'll find a spot that works for you. We can't wait to meet you.</p>
+
+        <div class="cdetails">
+          <div class="cd"><div class="ic">&#9873;</div><div><div class="k">Studio</div><div class="v">318 W Broad Street, Richmond, VA 23220</div></div></div>
+          <div class="cd"><div class="ic">&#9742;</div><div><div class="k">Phone</div><div class="v">(804) 555-0173</div></div></div>
+          <div class="cd"><div class="ic">&#9993;</div><div><div class="k">Email</div><div class="v">hello@birchwoodsalon.com</div></div></div>
+        </div>
+
+        <div class="hours-box">
+          <h4>Hours</h4>
+          <div class="hr"><span>Tuesday &ndash; Friday</span><b>9:00a &ndash; 7:00p</b></div>
+          <div class="hr"><span>Saturday</span><b>9:00a &ndash; 5:00p</b></div>
+          <div class="hr"><span>Sunday &ndash; Monday</span><b>Closed</b></div>
+        </div>
+      </div>
+
+      <form class="booking" onsubmit="event.preventDefault(); this.reset(); alert('Thank you! Your appointment request has been received. We\'ll confirm by phone or email within one business day.');">
+        <h3>Request an Appointment</h3>
+        <p class="fsub">Tell us what you're looking for and we'll be in touch to confirm.</p>
+        <div class="brow">
+          <div class="bg"><label for="name">Name</label><input id="name" name="name" type="text" required placeholder="Your name"></div>
+          <div class="bg"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" required placeholder="(804) 555-0000"></div>
+        </div>
+        <div class="bg"><label for="email">Email</label><input id="email" name="email" type="email" placeholder="you@email.com"></div>
+        <div class="brow">
+          <div class="bg"><label for="service">Service</label>
+            <select id="service" name="service">
+              <option>Cut &amp; Style</option>
+              <option>Color</option>
+              <option>Highlights / Balayage</option>
+              <option>Treatment</option>
+              <option>Bridal / Event</option>
+              <option>Not sure yet</option>
+            </select>
+          </div>
+          <div class="bg"><label for="stylist">Preferred Stylist</label>
+            <select id="stylist" name="stylist">
+              <option>No preference</option>
+              <option>Maya Ellison</option>
+              <option>Jordan Reyes</option>
+              <option>Sofia Nguyen</option>
+            </select>
+          </div>
+        </div>
+        <div class="bg"><label for="date">Preferred Date</label><input id="date" name="date" type="date"></div>
+        <div class="bg"><label for="notes">Notes</label><textarea id="notes" name="notes" placeholder="Anything we should know before your visit?"></textarea></div>
+        <button type="submit" class="btn btn-solid">Request Appointment</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer>
+  <div class="wrap foot">
+    <div>
+      <div class="b1">Birchwood</div>
+      <div class="b2">Salon &middot; Richmond</div>
+      <p>A boutique hair salon in the heart of Richmond, Virginia &mdash; cuts, color, and care in a bright, welcoming space.</p>
+    </div>
+    <div>
+      <h5>Explore</h5>
+      <ul>
+        <li><a href="#services">Services &amp; Pricing</a></li>
+        <li><a href="#about">Our Story</a></li>
+        <li><a href="#stylists">Our Stylists</a></li>
+        <li><a href="#contact">Book a Visit</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Visit</h5>
+      <ul>
+        <li>318 W Broad Street</li>
+        <li>Richmond, VA 23220</li>
+        <li><a href="tel:+18045550173">(804) 555-0173</a></li>
+        <li><a href="mailto:hello@birchwoodsalon.com">hello@birchwoodsalon.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">&copy; 2026 Birchwood Salon &middot; Richmond, Virginia &middot; All rights reserved</div>
+</footer>
+
+</body>
+</html>

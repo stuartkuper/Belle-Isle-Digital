@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trattoria Roma &mdash; Rustic Italian in Richmond, Virginia</title>
+<meta name="description" content="Trattoria Roma is a warm, family-run Italian restaurant in Richmond, Virginia. Handmade pasta, wood-fired pizza, and Roman classics. Reserve a table tonight.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper:    #fbf6ec;
+    --cream:    #f6ecd9;
+    --cream-2:  #efe2ca;
+    --tomato:   #9c2b1b;
+    --tomato-2: #b8402a;
+    --brick:    #7a2417;
+    --olive:    #5c6b32;
+    --olive-d:  #46521f;
+    --gold:     #cf9436;
+    --espresso: #241a13;
+    --espresso-2:#33261b;
+    --muted:    #7d6f5e;
+    --line:     #e6d7bf;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Work Sans", system-ui, sans-serif;
+    color: var(--espresso);
+    background: var(--paper);
+    line-height: 1.7;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, .serif { font-family: "Fraunces", Georgia, serif; font-weight: 600; line-height: 1.08; }
+  a { color: inherit; text-decoration: none; }
+  .script { font-family: "Dancing Script", cursive; font-weight: 700; }
+
+  .wrap { width: 100%; max-width: 1160px; margin: 0 auto; padding: 0 32px; }
+
+  .eyebrow { font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.28em; color: var(--tomato); font-weight: 600; }
+  .script-accent { font-family: "Dancing Script", cursive; font-weight: 700; font-size: 30px; color: var(--gold); display: block; }
+
+  /* Tricolore accent */
+  .tri { display: inline-flex; width: 64px; height: 4px; overflow: hidden; border-radius: 2px; }
+  .tri i { flex: 1; }
+  .tri i:nth-child(1) { background: var(--olive); }
+  .tri i:nth-child(2) { background: #f4efe4; }
+  .tri i:nth-child(3) { background: var(--tomato); }
+
+  .btn {
+    display: inline-block; font-family: "Work Sans", sans-serif; font-weight: 500;
+    font-size: 13px; text-transform: uppercase; letter-spacing: 0.14em;
+    padding: 16px 34px; cursor: pointer; transition: background .2s, color .2s, border-color .2s;
+    border: 1.5px solid transparent; border-radius: 2px;
+  }
+  .btn-solid { background: var(--tomato); color: var(--paper); }
+  .btn-solid:hover { background: var(--brick); }
+  .btn-gold { background: var(--gold); color: var(--espresso); }
+  .btn-gold:hover { background: #b97f26; }
+  .btn-outline { background: transparent; color: var(--espresso); border-color: var(--espresso); }
+  .btn-outline:hover { background: var(--espresso); color: var(--paper); }
+  .btn-ghost { background: transparent; color: #fff; border-color: rgba(255,255,255,0.6); }
+  .btn-ghost:hover { background: #fff; color: var(--espresso); }
+
+  /* ---------- Header (centered logo, split nav) ---------- */
+  header { position: sticky; top: 0; z-index: 60; background: var(--paper); border-bottom: 1px solid var(--line); }
+  header .tline { height: 3px; display: flex; }
+  header .tline i { flex: 1; }
+  header .tline i:nth-child(1) { background: var(--olive); }
+  header .tline i:nth-child(2) { background: #f4efe4; }
+  header .tline i:nth-child(3) { background: var(--tomato); }
+  .nav { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: 96px; }
+  .brand { justify-self: center; text-align: center; line-height: 1; }
+  .brand .b1 { font-family: "Fraunces", serif; font-weight: 700; font-size: 28px; letter-spacing: 0.02em; color: var(--tomato); }
+  .brand .b2 { display: block; font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.34em; color: var(--muted); margin-top: 6px; }
+  .nav-side { display: flex; align-items: center; gap: 30px; list-style: none; }
+  .nav-side.left { justify-self: start; }
+  .nav-side.right { justify-self: end; }
+  .nav-side a.link { font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.16em; font-weight: 400; position: relative; padding: 4px 0; }
+  .nav-side a.link::after { content: ""; position: absolute; left: 0; bottom: 0; width: 0; height: 2px; background: var(--gold); transition: width .25s; }
+  .nav-side a.link:hover::after { width: 100%; }
+  .nav-side .btn { padding: 11px 22px; }
+  .menu-btn { display: none; background: none; border: none; font-size: 24px; cursor: pointer; color: var(--tomato); justify-self: end; }
+
+  .mobile-menu { display: none; background: var(--cream); border-bottom: 1px solid var(--line); }
+  .mobile-menu.open { display: block; }
+  .mobile-menu a { display: block; padding: 16px 32px; border-bottom: 1px solid var(--line); text-transform: uppercase; letter-spacing: 0.14em; font-size: 13px; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative; color: var(--paper); text-align: center;
+    background-color: var(--espresso);
+    background-image:
+      linear-gradient(rgba(30,20,14,0.62), rgba(30,20,14,0.78)),
+      url("https://images.unsplash.com/photo-1579684947550-22e945225d9a?auto=format&fit=crop&w=1600&q=75");
+    background-size: cover; background-position: center;
+  }
+  .hero-inner { padding: 132px 0 138px; max-width: 760px; margin: 0 auto; }
+  .hero .script-accent { color: var(--gold); font-size: 34px; margin-bottom: 8px; }
+  .hero h1 { font-size: 86px; font-weight: 600; letter-spacing: -0.01em; text-shadow: 0 2px 30px rgba(0,0,0,0.3); }
+  .hero .lead { font-size: 19px; color: #f2e7d5; font-weight: 300; margin: 22px auto 0; max-width: 500px; }
+  .hero .tri { margin: 30px auto 0; width: 84px; height: 5px; }
+  .hero-actions { margin-top: 36px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .hero-note { margin-top: 34px; font-size: 12.5px; letter-spacing: 0.14em; text-transform: uppercase; color: #d8c7ac; }
+
+  /* ---------- Section scaffolding ---------- */
+  section { padding: 104px 0; }
+  .center { text-align: center; }
+  .sec-head { max-width: 640px; margin-bottom: 62px; }
+  .sec-head.center { margin-left: auto; margin-right: auto; }
+  .sec-head .eyebrow { display: block; margin-bottom: 12px; }
+  .sec-head h2 { font-size: 48px; }
+  .sec-head p { color: var(--muted); font-size: 17px; margin-top: 14px; }
+  .sec-head .tri { margin-top: 20px; }
+  .center .tri { margin-left: auto; margin-right: auto; }
+
+  /* ---------- Menu ---------- */
+  #menu { background: var(--paper); }
+  .featured { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 68px; }
+  .dish { background: var(--cream); border: 1px solid var(--line); border-radius: 4px; overflow: hidden; box-shadow: 0 10px 30px rgba(36,26,19,0.06); transition: transform .25s, box-shadow .25s; }
+  .dish:hover { transform: translateY(-6px); box-shadow: 0 20px 44px rgba(36,26,19,0.14); }
+  .dish .img { aspect-ratio: 4 / 3; background-color: var(--cream-2); background-size: cover; background-position: center; }
+  .dish .body { padding: 24px 24px 28px; }
+  .dish .cat { font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--olive-d); font-weight: 600; }
+  .dish h3 { font-size: 25px; margin: 8px 0 4px; display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  .dish h3 .p { font-family: "Fraunces", serif; color: var(--tomato); font-size: 22px; white-space: nowrap; }
+  .dish .it { font-style: italic; font-family: "Fraunces", serif; color: var(--gold); font-size: 15.5px; }
+  .dish p { color: var(--muted); font-size: 14.5px; margin-top: 10px; }
+
+  /* Menu text lists */
+  .menu-lists { display: grid; grid-template-columns: 1fr 1fr; gap: 48px 72px; }
+  .mlist h3 { font-size: 27px; display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+  .mlist h3 .tri { width: 42px; height: 3px; }
+  .mrow { display: flex; align-items: baseline; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .mrow .n { font-size: 16px; font-weight: 400; color: var(--espresso); }
+  .mrow .n em { font-style: italic; font-family: "Fraunces", serif; color: var(--gold); font-size: 14px; margin-left: 6px; }
+  .mrow .n small { display: block; font-size: 12.5px; color: var(--muted); }
+  .mrow .dots { flex: 1; border-bottom: 1px dotted #cdb890; transform: translateY(-3px); }
+  .mrow .pr { font-family: "Fraunces", serif; font-size: 20px; font-weight: 600; color: var(--tomato); white-space: nowrap; }
+  .menu-foot { margin-top: 52px; text-align: center; font-family: "Fraunces", serif; font-style: italic; font-size: 20px; color: var(--muted); }
+
+  /* ---------- Quote band ---------- */
+  .band {
+    background-color: var(--espresso); color: var(--paper); text-align: center;
+    background-image: linear-gradient(rgba(30,20,14,0.72), rgba(30,20,14,0.78)),
+      url("https://images.unsplash.com/photo-1498579150354-977475b7ea0b?auto=format&fit=crop&w=1600&q=75");
+    background-size: cover; background-position: center; padding: 118px 0;
+  }
+  .band .script-accent { color: var(--gold); font-size: 40px; }
+  .band .q { font-family: "Fraunces", serif; font-size: 40px; font-weight: 500; max-width: 720px; margin: 8px auto 0; line-height: 1.2; }
+  .band .tr { margin-top: 20px; font-size: 15px; color: #d8c7ac; font-style: italic; font-family: "Fraunces", serif; }
+
+  /* ---------- About ---------- */
+  #about { background: var(--cream); }
+  .about-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 72px; align-items: center; }
+  .about-img { position: relative; }
+  .about-img .pic { position: relative; overflow: hidden; aspect-ratio: 4 / 5; background-color: var(--cream-2); background-size: cover; background-position: center; border-radius: 4px; border: 6px solid var(--paper); box-shadow: 0 24px 50px rgba(36,26,19,0.18); }
+  .about-img .cap {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(transparent, rgba(36,26,19,0.86)); color: var(--paper);
+    padding: 46px 22px 18px; font-family: "Fraunces", serif; font-style: italic; font-size: 15px;
+  }
+  .about-feats { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+  .about-feats .chip { display: inline-flex; align-items: center; gap: 9px; background: var(--paper); border: 1px solid var(--line); border-radius: 40px; padding: 9px 18px; font-size: 13px; letter-spacing: 0.02em; }
+  .about-feats .chip b { color: var(--tomato); font-size: 14px; }
+  .about-copy .script-accent { margin-bottom: 2px; }
+  .about-copy h2 { font-size: 48px; margin-top: 2px; }
+  .about-copy .tri { margin: 18px 0; }
+  .about-copy p { color: var(--muted); font-size: 16.5px; margin-top: 16px; }
+  .about-copy .sign { margin-top: 26px; font-family: "Dancing Script", cursive; font-weight: 700; font-size: 30px; color: var(--tomato); }
+  .about-copy .sign small { display: block; font-family: "Work Sans", sans-serif; font-weight: 400; font-size: 12.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 2px; }
+
+  /* ---------- Contact / reservations ---------- */
+  #contact { background: var(--paper); }
+  .resbar { background: var(--espresso); color: var(--paper); border-radius: 6px; padding: 40px 40px 34px; box-shadow: 0 24px 54px rgba(36,26,19,0.18); }
+  .resbar .rtop { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 26px; }
+  .resbar h3 { font-family: "Fraunces", serif; font-size: 30px; color: var(--paper); }
+  .resbar .callme { font-size: 14px; color: #cbb99e; }
+  .resbar .callme b { color: var(--gold); font-family: "Fraunces", serif; font-size: 19px; margin-left: 4px; }
+  .resfields { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr auto; gap: 16px; align-items: end; }
+  .rg label { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; color: #c9b79c; margin-bottom: 7px; }
+  .rg input, .rg select {
+    width: 100%; padding: 13px 14px; border: 1px solid #4a3a2b; background: var(--espresso-2);
+    font-family: "Work Sans", sans-serif; font-size: 15px; font-weight: 300; color: var(--paper); border-radius: 2px;
+  }
+  .rg input:focus, .rg select:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(207,148,54,0.18); }
+  .resfields .btn-gold { white-space: nowrap; }
+  .res-note { text-align: center; margin-top: 20px; font-size: 13.5px; color: #c9b79c; font-style: italic; font-family: "Fraunces", serif; }
+
+  .info-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 40px; }
+  .info-card { background: var(--cream); border: 1px solid var(--line); border-radius: 6px; padding: 30px 28px; }
+  .info-card .ic { width: 46px; height: 46px; border-radius: 50%; background: var(--paper); border: 1px solid var(--line); color: var(--tomato); display: grid; place-items: center; font-size: 19px; margin-bottom: 16px; }
+  .info-card h4 { font-family: "Fraunces", serif; font-size: 22px; margin-bottom: 10px; }
+  .info-card p { color: var(--muted); font-size: 14.5px; }
+  .info-card .hr { display: flex; justify-content: space-between; font-size: 14px; padding: 4px 0; color: var(--muted); }
+  .info-card .hr b { color: var(--espresso); font-weight: 500; }
+  .info-card a { color: var(--tomato); }
+  .info-card a:hover { color: var(--brick); }
+
+  /* ---------- Footer ---------- */
+  footer { background: var(--espresso); color: #c7b49a; }
+  footer .fbar { height: 5px; display: flex; }
+  footer .fbar i { flex: 1; }
+  footer .fbar i:nth-child(1) { background: var(--olive); }
+  footer .fbar i:nth-child(2) { background: #f4efe4; }
+  footer .fbar i:nth-child(3) { background: var(--tomato); }
+  .foot { padding: 62px 0 32px; text-align: center; }
+  .foot .b1 { font-family: "Fraunces", serif; font-size: 34px; font-weight: 700; color: var(--gold); }
+  .foot .b2 { font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.34em; color: #a5927a; margin-top: 8px; }
+  .foot p { font-size: 14.5px; margin: 18px auto 0; max-width: 440px; color: #a5927a; }
+  .foot .fnav { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; margin-top: 28px; }
+  .foot .fnav a { font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.16em; color: #c7b49a; }
+  .foot .fnav a:hover { color: var(--paper); }
+  .foot .fcontact { margin-top: 22px; font-size: 14px; color: #a5927a; }
+  .foot .fcontact a { color: #c7b49a; }
+  .foot .fcontact a:hover { color: var(--paper); }
+  .foot-bottom { border-top: 1px solid #453626; padding: 22px 0; text-align: center; font-size: 12.5px; color: #8c7a63; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 940px) {
+    .featured { grid-template-columns: 1fr; max-width: 440px; margin-left: auto; margin-right: auto; margin-bottom: 56px; }
+    .menu-lists { grid-template-columns: 1fr; gap: 40px; }
+    .about-grid { grid-template-columns: 1fr; gap: 48px; }
+    .resfields { grid-template-columns: 1fr 1fr; }
+    .info-row { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 66px; }
+  }
+  @media (max-width: 680px) {
+    .nav { display: flex; justify-content: space-between; height: 74px; }
+    .nav-side { display: none; }
+    .menu-btn { display: block; }
+    .hero h1 { font-size: 48px; }
+    .hero-inner { padding: 96px 0 100px; }
+    .sec-head h2, .about-copy h2 { font-size: 36px; }
+    .band .q { font-size: 29px; }
+    .resfields { grid-template-columns: 1fr; }
+    .resbar { padding: 26px 22px; }
+    section { padding: 72px 0; }
+    .band { padding: 84px 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <div class="tline"><i></i><i></i><i></i></div>
+  <div class="wrap nav">
+    <ul class="nav-side left">
+      <li><a class="link" href="#menu">Menu</a></li>
+      <li><a class="link" href="#about">About</a></li>
+    </ul>
+    <a href="#top" class="brand">
+      <span class="b1">Trattoria Roma</span>
+      <span class="b2">Cucina Italiana &middot; Richmond</span>
+    </a>
+    <ul class="nav-side right">
+      <li><a class="link" href="#contact">Contact</a></li>
+      <li><a class="btn btn-solid" href="#contact">Reserve</a></li>
+    </ul>
+    <button class="menu-btn" aria-label="Menu" onclick="document.getElementById('mm').classList.toggle('open')">&#9776;</button>
+  </div>
+  <nav class="mobile-menu" id="mm">
+    <a href="#menu" onclick="document.getElementById('mm').classList.remove('open')">Menu</a>
+    <a href="#about" onclick="document.getElementById('mm').classList.remove('open')">About</a>
+    <a href="#contact" onclick="document.getElementById('mm').classList.remove('open')">Contact</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-inner">
+        <span class="script-accent">Benvenuti a</span>
+        <h1>Trattoria Roma</h1>
+        <p class="lead">Handmade pasta, wood-fired pizza, and the soul of Rome &mdash; served in the heart of Richmond.</p>
+        <div class="tri"><i></i><i></i><i></i></div>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-gold">Reserve a Table</a>
+          <a href="#menu" class="btn btn-ghost">View the Menu</a>
+        </div>
+        <p class="hero-note">Dinner nightly &middot; Open since 2009 &middot; Carytown, Richmond</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Menu -->
+  <section id="menu">
+    <div class="wrap">
+      <div class="sec-head center">
+        <span class="eyebrow">From Our Kitchen</span>
+        <h2>Menu Highlights</h2>
+        <p>Everything is made in-house daily &mdash; pasta rolled by hand, sauces simmered slow, dough proofed 48 hours.</p>
+        <div class="tri"><i></i><i></i><i></i></div>
+      </div>
+
+      <!-- Featured dishes with photos -->
+      <div class="featured">
+        <div class="dish">
+          <div class="img" style="background-image:url('https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?auto=format&fit=crop&w=800&q=70')"></div>
+          <div class="body">
+            <span class="cat">Antipasti</span>
+            <h3>Panzanella <span class="p">$12</span></h3>
+            <span class="it">Tuscan bread &amp; tomato salad</span>
+            <p>Vine tomatoes, cucumber, red onion, basil, and rustic bread tossed in aged balsamic.</p>
+          </div>
+        </div>
+        <div class="dish">
+          <div class="img" style="background-image:url('https://images.unsplash.com/photo-1595295333158-4742f28fbd85?auto=format&fit=crop&w=800&q=70')"></div>
+          <div class="body">
+            <span class="cat">Primi</span>
+            <h3>Spaghetti alle Vongole <span class="p">$24</span></h3>
+            <span class="it">Spaghetti with clams</span>
+            <p>Fresh clams, garlic, white wine, chili, and parsley over house-made spaghetti.</p>
+          </div>
+        </div>
+        <div class="dish">
+          <div class="img" style="background-image:url('https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=800&q=70')"></div>
+          <div class="body">
+            <span class="cat">Pizze</span>
+            <h3>Margherita <span class="p">$18</span></h3>
+            <span class="it">The classic</span>
+            <p>San Marzano tomato, fior di latte, fresh basil, and olive oil from our wood-fired oven.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Text menu lists -->
+      <div class="menu-lists">
+        <div class="mlist">
+          <h3><span class="tri"><i></i><i></i><i></i></span> Primi &amp; Paste</h3>
+          <div class="mrow"><span class="n">Tagliatelle al Ragù <em>slow beef ragù</em></span><span class="dots"></span><span class="pr">$22</span></div>
+          <div class="mrow"><span class="n">Cacio e Pepe <em>pecorino &amp; black pepper</em></span><span class="dots"></span><span class="pr">$19</span></div>
+          <div class="mrow"><span class="n">Rigatoni all'Amatriciana <em>guanciale &amp; tomato</em></span><span class="dots"></span><span class="pr">$21</span></div>
+          <div class="mrow"><span class="n">Lasagna della Nonna <em>grandmother's recipe</em></span><span class="dots"></span><span class="pr">$20</span></div>
+          <div class="mrow"><span class="n">Gnocchi al Pomodoro <em>potato dumplings</em></span><span class="dots"></span><span class="pr">$18</span></div>
+        </div>
+        <div class="mlist">
+          <h3><span class="tri"><i></i><i></i><i></i></span> Secondi &amp; Dolci</h3>
+          <div class="mrow"><span class="n">Pollo alla Parmigiana <em>chicken parmesan</em></span><span class="dots"></span><span class="pr">$26</span></div>
+          <div class="mrow"><span class="n">Branzino al Forno <em>roasted sea bass</em></span><span class="dots"></span><span class="pr">$29</span></div>
+          <div class="mrow"><span class="n">Saltimbocca alla Romana <em>veal &amp; prosciutto</em></span><span class="dots"></span><span class="pr">$28</span></div>
+          <div class="mrow"><span class="n">Tiramisù <em>house classic</em></span><span class="dots"></span><span class="pr">$10</span></div>
+          <div class="mrow"><span class="n">Cannoli Siciliani <em>ricotta &amp; pistachio</em></span><span class="dots"></span><span class="pr">$9</span></div>
+        </div>
+      </div>
+
+      <p class="menu-foot">Ask your server about tonight's specials &amp; our rotating regional wine list.</p>
+    </div>
+  </section>
+
+  <!-- Quote band -->
+  <section class="band">
+    <div class="wrap">
+      <span class="script-accent">A tavola!</span>
+      <p class="q">&ldquo;La vita è una combinazione di magia e pasta.&rdquo;</p>
+      <p class="tr">Life is a combination of magic and pasta. &mdash; Federico Fellini</p>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="wrap about-grid">
+      <div class="about-copy">
+        <span class="script-accent">La Nostra Storia</span>
+        <h2>A little piece of Rome in Richmond</h2>
+        <div class="tri"><i></i><i></i><i></i></div>
+        <p>Trattoria Roma began in 2009, when the Marchetti family traded a small kitchen in Trastevere for a storefront in Carytown &mdash; bringing along their copper pots, their nonna's recipes, and a stubborn belief that good food takes time.</p>
+        <p>Today we still roll pasta by hand each morning, simmer our ragù for hours, and welcome every guest like family. Come hungry, stay late, and leave a little happier than you arrived.</p>
+        <div class="about-feats">
+          <span class="chip"><b>&#10022;</b> Handmade pasta daily</span>
+          <span class="chip"><b>&#10022;</b> Wood-fired oven</span>
+          <span class="chip"><b>&#10022;</b> Family-run since 2009</span>
+        </div>
+        <div class="sign">The Marchetti Family<small>Owners &amp; Cooks</small></div>
+      </div>
+      <div class="about-img">
+        <div class="pic" style="background-image:url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=900&q=75')">
+          <div class="cap">Our dining room &mdash; West Cary Street, Carytown</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact / reservations -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="sec-head center">
+        <span class="eyebrow">Reservations &amp; Visit</span>
+        <h2>Join us for dinner</h2>
+        <p>Reserve in seconds below, give us a call, or just walk in &mdash; we always keep a few tables open.</p>
+        <div class="tri"><i></i><i></i><i></i></div>
+      </div>
+
+      <form class="resbar" onsubmit="event.preventDefault(); this.reset(); alert('Grazie! Your reservation request has been received. We\'ll confirm by phone or email shortly.');">
+        <div class="rtop">
+          <h3>Book a Table</h3>
+          <span class="callme">Prefer to call? <b>(804) 555-0198</b></span>
+        </div>
+        <div class="resfields">
+          <div class="rg"><label for="name">Name</label><input id="name" name="name" type="text" required placeholder="Your name"></div>
+          <div class="rg"><label for="party">Party</label>
+            <select id="party" name="party">
+              <option>1 guest</option>
+              <option selected>2 guests</option>
+              <option>3 guests</option>
+              <option>4 guests</option>
+              <option>5 guests</option>
+              <option>6 guests</option>
+              <option>7+ guests</option>
+            </select>
+          </div>
+          <div class="rg"><label for="date">Date</label><input id="date" name="date" type="date"></div>
+          <div class="rg"><label for="time">Time</label><input id="time" name="time" type="time"></div>
+          <div class="rg"><button type="submit" class="btn btn-gold">Reserve</button></div>
+        </div>
+        <p class="res-note">We'll confirm your reservation by phone or email within the hour.</p>
+      </form>
+
+      <div class="info-row">
+        <div class="info-card">
+          <div class="ic">&#9873;</div>
+          <h4>Find Us</h4>
+          <p>2712 W Cary Street<br>Richmond, VA 23221<br>Carytown</p>
+        </div>
+        <div class="info-card">
+          <div class="ic">&#8987;</div>
+          <h4>Hours</h4>
+          <div class="hr"><span>Tue &ndash; Thu</span><b>5:00 &ndash; 10:00p</b></div>
+          <div class="hr"><span>Fri &ndash; Sat</span><b>5:00 &ndash; 11:00p</b></div>
+          <div class="hr"><span>Sunday</span><b>4:00 &ndash; 9:00p</b></div>
+          <div class="hr"><span>Monday</span><b>Closed</b></div>
+        </div>
+        <div class="info-card">
+          <div class="ic">&#9993;</div>
+          <h4>Contact</h4>
+          <p>
+            <a href="tel:+18045550198">(804) 555-0198</a><br>
+            <a href="mailto:ciao@trattoriaroma-rva.com">ciao@trattoriaroma-rva.com</a><br>
+            Private events &amp; large parties welcome
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer>
+  <div class="fbar"><i></i><i></i><i></i></div>
+  <div class="wrap foot">
+    <div class="b1">Trattoria Roma</div>
+    <div class="b2">Cucina Italiana &middot; Richmond</div>
+    <p>Family-run Roman cooking in Carytown since 2009 &mdash; handmade pasta, wood-fired pizza, and a warm welcome.</p>
+    <ul class="fnav">
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#about">Our Story</a></li>
+      <li><a href="#contact">Reservations</a></li>
+    </ul>
+    <div class="fcontact">2712 W Cary Street, Richmond, VA 23221 &nbsp;&middot;&nbsp; <a href="tel:+18045550198">(804) 555-0198</a> &nbsp;&middot;&nbsp; <a href="mailto:ciao@trattoriaroma-rva.com">ciao@trattoriaroma-rva.com</a></div>
+  </div>
+  <div class="foot-bottom">&copy; 2026 Trattoria Roma &middot; Richmond, Virginia &middot; Buon appetito</div>
+</footer>
+
+</body>
+</html>

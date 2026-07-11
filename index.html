@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>James River Digital — Web Design for Local Businesses</title>
+  <title>Belle Isle Digital — Web Design for Local Businesses</title>
+  <meta name="description" content="Belle Isle Digital builds fast, honest websites for local businesses in Richmond, Virginia — new builds, redesigns, and ongoing maintenance, delivered in about two weeks." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
@@ -208,6 +209,27 @@
       border-radius: 2px;
       transition: .25s;
     }
+    .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      background: rgba(13, 37, 69, .98);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid rgba(255,255,255,.08);
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      padding: 16px 24px;
+      color: rgba(255,255,255,.85);
+      font-size: .9375rem;
+      font-weight: 500;
+      border-bottom: 1px solid rgba(255,255,255,.07);
+    }
+    .mobile-menu a:hover { color: var(--white); }
+    .mobile-menu a.mobile-menu-cta { color: var(--teal-light); font-weight: 700; border-bottom: none; }
 
     /* ═══════════════════════════════════════
        HERO
@@ -296,34 +318,6 @@
       align-items: center;
     }
 
-    .hero-trust {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 52px;
-      padding-top: 40px;
-      border-top: 1px solid rgba(255,255,255,.1);
-    }
-    .trust-avatars {
-      display: flex;
-    }
-    .trust-avatars span {
-      width: 32px; height: 32px;
-      border-radius: 50%;
-      border: 2px solid var(--navy);
-      background: var(--teal-mid);
-      margin-left: -8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: .65rem;
-      font-weight: 700;
-      color: var(--white);
-    }
-    .trust-avatars span:first-child { margin-left: 0; }
-    .trust-text { font-size: .8125rem; color: rgba(255,255,255,.65); line-height: 1.4; }
-    .trust-text strong { color: var(--white); }
-
     /* Hero visual / mockup card */
     .hero-visual {
       display: flex;
@@ -405,7 +399,6 @@
       gap: 10px;
     }
     .badge-1 { bottom: -20px; left: -30px; }
-    .badge-2 { top: -16px; right: -20px; }
 
     .badge-icon {
       width: 36px; height: 36px;
@@ -635,6 +628,19 @@
       overflow: hidden;
     }
 
+    /* Live scaled preview of a real demo site */
+    .portfolio-thumb .preview {
+      position: absolute;
+      top: 0; left: 0;
+      width: 400%;
+      height: 400%;
+      border: 0;
+      transform: scale(0.25);
+      transform-origin: top left;
+      pointer-events: none;
+      background: var(--white);
+    }
+
     .thumb-placeholder {
       position: absolute;
       inset: 0;
@@ -706,6 +712,66 @@
       margin-bottom: 4px;
     }
     .portfolio-info p { font-size: .85rem; color: var(--gray-400); }
+
+    /* ═══════════════════════════════════════
+       FAQ
+    ═══════════════════════════════════════ */
+    #faq {
+      padding: 100px 0;
+      background: var(--white);
+    }
+
+    .faq-list {
+      max-width: 760px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .faq-item {
+      background: var(--off-white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      padding: 6px 26px;
+    }
+
+    .faq-item summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      font-weight: 600;
+      color: var(--navy);
+      font-size: 1rem;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+
+    .faq-icon {
+      flex-shrink: 0;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--green-soft);
+      color: var(--teal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      font-weight: 400;
+      transition: transform .2s ease;
+    }
+    .faq-item[open] .faq-icon { transform: rotate(45deg); }
+
+    .faq-item p {
+      padding: 0 0 22px;
+      color: var(--gray-500);
+      font-size: .9375rem;
+      line-height: 1.7;
+    }
 
     /* ═══════════════════════════════════════
        CONTACT
@@ -920,7 +986,7 @@
   <div class="container">
     <nav class="nav-inner">
 
-      <a href="#" class="logo" aria-label="James River Digital home">
+      <a href="#" class="logo" aria-label="Belle Isle Digital home">
         <div class="logo-mark">
           <!-- River wave icon -->
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -929,7 +995,7 @@
           </svg>
         </div>
         <div class="logo-text">
-          James River Digital
+          Belle Isle Digital
           <span>Web Design Agency</span>
         </div>
       </a>
@@ -945,12 +1011,19 @@
         <a href="#contact" class="btn btn-primary">Get a Free Quote</a>
       </div>
 
-      <button class="hamburger" aria-label="Toggle menu">
+      <button class="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileMenu">
         <span></span><span></span><span></span>
       </button>
 
     </nav>
   </div>
+  <nav class="mobile-menu" id="mobileMenu">
+    <a href="#services">Services</a>
+    <a href="#work">Work</a>
+    <a href="#why-us">About</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact" class="mobile-menu-cta">Get a Free Quote</a>
+  </nav>
 </header>
 
 
@@ -970,7 +1043,7 @@
         </h1>
 
         <p class="hero-sub">
-          We help local businesses across the Richmond area get a professional online presence — built from scratch, redesigned for growth, or maintained so you never have to think about it.
+          We build clean, fast websites for Richmond-area businesses — new builds, redesigns, and ongoing maintenance.
         </p>
 
         <div class="hero-actions">
@@ -982,15 +1055,6 @@
           <a href="#work" class="btn btn-outline">See Our Work</a>
         </div>
 
-        <div class="hero-trust">
-          <div class="trust-avatars">
-            <span>LP</span>
-            <span>MK</span>
-            <span>RH</span>
-            <span>JC</span>
-          </div>
-          <p class="trust-text"><strong>Trusted by local business owners</strong><br>from restaurants to law firms to boutique shops</p>
-        </div>
       </div>
 
       <!-- Visual -->
@@ -1032,25 +1096,14 @@
             </div>
           </div>
 
-          <!-- Floating badge 1 -->
+          <!-- Floating badge -->
           <div class="floating-badge badge-1">
             <div class="badge-icon green">
               <svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#0a7c6e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
             <div class="badge-text">
-              <strong>Launched on time</strong>
-              <span>2-week turnaround</span>
-            </div>
-          </div>
-
-          <!-- Floating badge 2 -->
-          <div class="floating-badge badge-2">
-            <div class="badge-icon blue">
-              <svg viewBox="0 0 24 24" fill="none"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="#163a6b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </div>
-            <div class="badge-text">
-              <strong>5-star rated</strong>
-              <span>Local clients</span>
+              <strong>Built for speed</strong>
+              <span>Live in about 2 weeks</span>
             </div>
           </div>
         </div>
@@ -1070,7 +1123,7 @@
     <div class="services-header">
       <span class="section-label">What We Do</span>
       <h2 class="section-title">Services Built for Local Business</h2>
-      <p class="section-subtitle">Whether you're starting from zero, ready for a refresh, or just need someone to keep things running — we've got you covered.</p>
+      <p class="section-subtitle">New builds, redesigns, and ongoing upkeep — whatever stage you're at.</p>
     </div>
 
     <div class="services-grid">
@@ -1084,7 +1137,7 @@
           </svg>
         </div>
         <h3>Website Design &amp; Build</h3>
-        <p>We design and build professional websites from the ground up — custom-crafted to represent your brand and convert visitors into customers. Fast, mobile-friendly, and built to last.</p>
+        <p>A custom site built from scratch to represent your brand — fast, mobile-friendly, and built to last.</p>
         <a href="#contact" class="service-link">
           Start a new site
           <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -1102,7 +1155,7 @@
           </svg>
         </div>
         <h3>Website Redesigns</h3>
-        <p>Already have a site that feels dated or isn't bringing in business? We'll modernize it — keeping your brand while transforming the look, feel, and performance to meet today's standards.</p>
+        <p>Site feeling dated? We'll modernize the look, feel, and performance while keeping your brand intact.</p>
         <a href="#contact" class="service-link">
           Refresh your site
           <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -1118,7 +1171,7 @@
           </svg>
         </div>
         <h3>Ongoing Maintenance &amp; Updates</h3>
-        <p>Your website isn't a one-and-done project. We offer ongoing plans to keep your site secure, updated, and current — so you can focus on running your business, not managing a website.</p>
+        <p>We keep your site secure, updated, and current — so you can focus on your business, not your website.</p>
         <a href="#contact" class="service-link">
           Learn about plans
           <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -1139,9 +1192,9 @@
 
       <!-- Content -->
       <div class="why-content">
-        <span class="section-label">Why James River Digital</span>
+        <span class="section-label">Why Belle Isle Digital</span>
         <h2 class="section-title">The Agency Feel — Without the Agency Runaround</h2>
-        <p class="section-subtitle">Big agencies have big overhead — and they treat small businesses like small accounts. We're local, lean, and genuinely invested in your success.</p>
+        <p class="section-subtitle">Belle Isle Digital is a Richmond-based studio focused on fast, honest websites for local businesses. You work directly with the person building your site — no account managers, no runaround.</p>
 
         <div class="why-items">
 
@@ -1151,7 +1204,7 @@
             </div>
             <div>
               <h4>Fast, Honest Turnaround</h4>
-              <p>Most projects are live within two weeks. No disappearing acts, no vague timelines — just clear milestones and a site you can be proud of, delivered on schedule.</p>
+              <p>We target a two-week launch, with clear milestones along the way — no vague timelines.</p>
             </div>
           </div>
 
@@ -1161,7 +1214,7 @@
             </div>
             <div>
               <h4>Modern, Professional Design</h4>
-              <p>We don't use templates or cookie-cutter layouts. Every site is designed with intention — clean, modern, and built to reflect the quality of your business.</p>
+              <p>No cookie-cutter templates — every site is designed to reflect the quality of your business.</p>
             </div>
           </div>
 
@@ -1171,7 +1224,7 @@
             </div>
             <div>
               <h4>Local, Personal Service</h4>
-              <p>You'll work directly with the person building your site — not a ticket system, not a junior account manager. We're your neighbors, and we're here when you need us.</p>
+              <p>You'll work directly with the person building your site — not a ticket system.</p>
             </div>
           </div>
 
@@ -1182,7 +1235,7 @@
       <div class="why-stats">
         <div class="stat-card accent">
           <div class="stat-num">2<span>wk</span></div>
-          <div class="stat-label">Avg. Launch Time</div>
+          <div class="stat-label">Target Launch Time</div>
         </div>
         <div class="stat-card">
           <div class="stat-num" style="color:var(--teal);">1:1</div>
@@ -1213,7 +1266,7 @@
       <div>
         <span class="section-label">Our Work</span>
         <h2 class="section-title">Projects We're Proud Of</h2>
-        <p class="section-subtitle">A sample of recent work for local businesses across the Richmond area.</p>
+        <p class="section-subtitle">Example sites we designed and built to show the style and quality you can expect — click any project to see it in action.</p>
       </div>
       <a href="#contact" class="btn btn-dark">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -1223,135 +1276,103 @@
 
     <div class="portfolio-grid">
 
-      <!-- Project 1 -->
-      <div class="portfolio-item">
+      <!-- Project 1 — Trattoria Roma -->
+      <a class="portfolio-item" href="trattoria-roma.html" target="_blank" rel="noopener">
         <div class="portfolio-thumb">
-          <div class="thumb-placeholder thumb-p1">
-            <div class="thumb-mock">
-              <div class="tm-nav"></div>
-              <div class="tm-hero"></div>
-              <div class="tm-row"><div class="tm-card"></div><div class="tm-card"></div><div class="tm-card"></div></div>
-            </div>
-          </div>
+          <iframe class="preview" src="trattoria-roma.html" title="Trattoria Roma website preview" loading="lazy" scrolling="no" tabindex="-1" aria-hidden="true"></iframe>
           <div class="portfolio-hover-overlay">
             <span class="overlay-label">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              View Project
+              View Example
             </span>
           </div>
         </div>
         <div class="portfolio-info">
           <span class="tag">Restaurant</span>
-          <h3>The Richmond Table</h3>
-          <p>Menu, reservations &amp; brand redesign</p>
+          <h3>Trattoria Roma</h3>
+          <p>Menu highlights, story &amp; online reservations</p>
         </div>
-      </div>
+      </a>
 
-      <!-- Project 2 -->
-      <div class="portfolio-item">
+      <!-- Project 2 — Birchwood Salon -->
+      <a class="portfolio-item" href="birchwood-salon.html" target="_blank" rel="noopener">
         <div class="portfolio-thumb">
-          <div class="thumb-placeholder thumb-p2">
-            <div class="thumb-mock">
-              <div class="tm-nav"></div>
-              <div class="tm-hero"></div>
-              <div class="tm-row"><div class="tm-card"></div><div class="tm-card"></div></div>
-            </div>
-          </div>
+          <iframe class="preview" src="birchwood-salon.html" title="Birchwood Salon website preview" loading="lazy" scrolling="no" tabindex="-1" aria-hidden="true"></iframe>
           <div class="portfolio-hover-overlay">
             <span class="overlay-label">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              View Project
+              View Example
             </span>
           </div>
         </div>
         <div class="portfolio-info">
-          <span class="tag">Law Firm</span>
-          <h3>Hargrove &amp; Associates</h3>
-          <p>Professional site &amp; lead generation</p>
+          <span class="tag">Hair &amp; Beauty</span>
+          <h3>Birchwood Salon</h3>
+          <p>Services, stylists &amp; online booking</p>
         </div>
-      </div>
+      </a>
 
-      <!-- Project 3 -->
-      <div class="portfolio-item">
+      <!-- Project 3 — Ridge & Sons Construction -->
+      <a class="portfolio-item" href="ridge-and-sons.html" target="_blank" rel="noopener">
         <div class="portfolio-thumb">
-          <div class="thumb-placeholder thumb-p3">
-            <div class="thumb-mock">
-              <div class="tm-nav"></div>
-              <div class="tm-hero"></div>
-              <div class="tm-row"><div class="tm-card"></div><div class="tm-card"></div><div class="tm-card"></div></div>
-            </div>
-          </div>
+          <iframe class="preview" src="ridge-and-sons.html" title="Ridge &amp; Sons Construction website preview" loading="lazy" scrolling="no" tabindex="-1" aria-hidden="true"></iframe>
           <div class="portfolio-hover-overlay">
             <span class="overlay-label">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              View Project
-            </span>
-          </div>
-        </div>
-        <div class="portfolio-info">
-          <span class="tag">Retail</span>
-          <h3>Carytown Candle Co.</h3>
-          <p>E-commerce &amp; product photography</p>
-        </div>
-      </div>
-
-      <!-- Project 4 -->
-      <div class="portfolio-item">
-        <div class="portfolio-thumb">
-          <div class="thumb-placeholder thumb-p4">
-            <div class="thumb-mock">
-              <div class="tm-nav"></div>
-              <div class="tm-hero"></div>
-              <div class="tm-row"><div class="tm-card"></div><div class="tm-card"></div></div>
-            </div>
-          </div>
-          <div class="portfolio-hover-overlay">
-            <span class="overlay-label">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              View Project
+              View Example
             </span>
           </div>
         </div>
         <div class="portfolio-info">
           <span class="tag">Home Services</span>
-          <h3>River City Remodeling</h3>
-          <p>New site, quote calculator &amp; reviews</p>
+          <h3>Ridge &amp; Sons Construction</h3>
+          <p>Services, recent work gallery &amp; free-estimate form</p>
         </div>
-      </div>
+      </a>
 
-      <!-- Project 5 -->
-      <div class="portfolio-item">
-        <div class="portfolio-thumb">
-          <div class="thumb-placeholder thumb-p5">
-            <div class="thumb-mock">
-              <div class="tm-nav"></div>
-              <div class="tm-hero"></div>
-              <div class="tm-row"><div class="tm-card"></div><div class="tm-card"></div><div class="tm-card"></div></div>
-            </div>
-          </div>
-          <div class="portfolio-hover-overlay">
-            <span class="overlay-label">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              View Project
-            </span>
-          </div>
-        </div>
-        <div class="portfolio-info">
-          <span class="tag">Health &amp; Wellness</span>
-          <h3>Fan District Fitness</h3>
-          <p>Class booking &amp; membership portal</p>
-        </div>
-      </div>
+    </div>
+  </div>
+</section>
 
-      <!-- Project 6 — "Yours" CTA card -->
-      <div class="portfolio-item" style="background: linear-gradient(135deg, var(--navy), var(--navy-mid)); border-color: transparent; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding: 40px 28px; min-height:240px;">
-        <div style="width:54px;height:54px;border-radius:50%;background:rgba(255,255,255,.1);border:2px dashed rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;margin-bottom:18px;">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg>
-        </div>
-        <h3 style="font-family:var(--font-serif);font-size:1.1rem;font-weight:700;color:var(--white);margin-bottom:8px;">Your Business Here</h3>
-        <p style="font-size:.875rem;color:rgba(255,255,255,.6);margin-bottom:22px;line-height:1.6;">Ready to build something you're proud of?</p>
-        <a href="#contact" class="btn btn-primary" style="font-size:.85rem;padding:10px 22px;">Let's Talk</a>
-      </div>
+
+<!-- ════════════════════════════
+     FAQ
+════════════════════════════ -->
+<section id="faq">
+  <div class="container">
+
+    <div class="services-header">
+      <span class="section-label">Questions</span>
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <p class="section-subtitle">Everything you're probably wondering before reaching out.</p>
+    </div>
+
+    <div class="faq-list">
+
+      <details class="faq-item">
+        <summary>How long does a typical project take?<span class="faq-icon">+</span></summary>
+        <p>We aim for about two weeks from kickoff to launch. Larger or more custom builds may take longer — we'll give you a clear timeline up front.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Do I need to provide my own content and photos?<span class="faq-icon">+</span></summary>
+        <p>Not necessarily — if you have photos and copy ready we'll use them, and if not, we can write copy and source stock photography to get you launched.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>What if I already have a website?<span class="faq-icon">+</span></summary>
+        <p>We can redesign what you have, migrate your existing content, and make sure nothing gets lost in the switch — including your domain and email.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Do you offer ongoing maintenance after launch?<span class="faq-icon">+</span></summary>
+        <p>Yes. Our maintenance plans cover updates, security, hosting, and small content changes, so you never have to think about your website again.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Do you only work with Richmond businesses?<span class="faq-icon">+</span></summary>
+        <p>Richmond is home base, but we work with local businesses throughout Central Virginia and beyond.</p>
+      </details>
 
     </div>
   </div>
@@ -1461,7 +1482,7 @@
 
       <!-- Brand -->
       <div class="footer-brand">
-        <a href="#" class="logo">
+        <a href="#hero" class="logo">
           <div class="logo-mark">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M2 14c2-2 4-2 6 0s4 2 6 0 4-2 6 0" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
@@ -1469,25 +1490,11 @@
             </svg>
           </div>
           <div class="logo-text">
-            James River Digital
+            Belle Isle Digital
             <span>Web Design Agency</span>
           </div>
         </a>
-        <p>Professional web design for local businesses in Richmond and the surrounding area. We build clean, modern websites that help your business grow.</p>
-        <div class="footer-social">
-          <!-- LinkedIn -->
-          <a href="#" class="social-btn" aria-label="LinkedIn">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/><circle cx="4" cy="4" r="2" stroke="currentColor" stroke-width="1.75"/></svg>
-          </a>
-          <!-- Facebook -->
-          <a href="#" class="social-btn" aria-label="Facebook">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-          <!-- Instagram -->
-          <a href="#" class="social-btn" aria-label="Instagram">
-            <svg viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.75"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.75"/><circle cx="17.5" cy="6.5" r=".75" fill="currentColor"/></svg>
-          </a>
-        </div>
+        <p>Clean, modern websites for local businesses in Richmond and the surrounding area.</p>
       </div>
 
       <!-- Services -->
@@ -1507,7 +1514,7 @@
         <ul>
           <li><a href="#why-us">About Us</a></li>
           <li><a href="#work">Our Work</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="#faq">FAQ</a></li>
         </ul>
       </div>
 
@@ -1516,7 +1523,7 @@
         <h4>Contact</h4>
         <ul>
           <li><a href="mailto:stuartkuper@gmail.com">stuartkuper@gmail.com</a></li>
-          <li><a href="tel:+18045550192">(804) 931-4620</a></li>
+          <li><a href="tel:+18049314620">(804) 931-4620</a></li>
           <li><a href="#contact">Richmond, Virginia</a></li>
         </ul>
       </div>
@@ -1524,11 +1531,7 @@
     </div>
 
     <div class="footer-bottom">
-      <p>&copy; 2026 James River Digital. All rights reserved.</p>
-      <p>
-        <a href="#">Privacy Policy</a> &nbsp;&middot;&nbsp;
-        <a href="#">Terms of Service</a>
-      </p>
+      <p>&copy; 2026 Belle Isle Digital. All rights reserved.</p>
     </div>
   </div>
 </footer>
@@ -1543,6 +1546,22 @@
   window.addEventListener('scroll', () => {
     header.classList.toggle('scrolled', window.scrollY > 50);
   }, { passive: true });
+
+  // Mobile menu toggle
+  const hamburger = document.querySelector('.hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('active', isOpen);
+    hamburger.setAttribute('aria-expanded', isOpen);
+  });
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false');
+    });
+  });
 
   // Active nav link on scroll
   const sections = document.querySelectorAll('section[id]');

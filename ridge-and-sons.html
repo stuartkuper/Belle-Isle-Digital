@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ridge &amp; Sons Construction &mdash; Richmond, VA General Contractor</title>
+<meta name="description" content="Ridge &amp; Sons Construction. Family-owned general contractor in Richmond, Virginia since 1992. Remodeling, additions, roofing, decks, and repairs.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:      #171717;   /* asphalt black */
+    --ink-2:    #232323;
+    --concrete: #e7e4dd;   /* concrete gray */
+    --concrete-2:#dcd8cf;
+    --paper:    #f6f4ef;
+    --yellow:   #f5b301;   /* safety yellow */
+    --yellow-d: #d69a00;
+    --rust:     #9e3b1f;   /* brick accent */
+    --line:     #c9c4b8;
+    --steel:    #6d6a63;
+    --white:    #ffffff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Barlow", system-ui, sans-serif;
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.6;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* Industrial condensed display type */
+  .display {
+    font-family: "Oswald", "Arial Narrow", sans-serif;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.005em;
+    line-height: 1.02;
+  }
+
+  .wrap { width: 100%; max-width: 1140px; margin: 0 auto; padding: 0 28px; }
+
+  /* Hazard stripe divider — signature motif */
+  .hazard {
+    height: 14px;
+    background: repeating-linear-gradient(
+      -45deg, var(--yellow) 0 22px, var(--ink) 22px 44px
+    );
+  }
+  .hazard-sm {
+    width: 64px; height: 6px; margin: 0 auto 28px;
+    background: repeating-linear-gradient(-45deg, var(--yellow) 0 8px, var(--ink) 8px 16px);
+  }
+
+  /* ---------- Top utility bar ---------- */
+  .topbar {
+    background: var(--ink);
+    color: #c9c6bf;
+    font-size: 12.5px;
+    letter-spacing: 0.04em;
+  }
+  .topbar .wrap { display: flex; justify-content: space-between; align-items: center; height: 38px; }
+  .topbar b { color: var(--yellow); }
+  .topbar .tb-right { display: flex; gap: 22px; }
+  .topbar .tb-right span { display: none; }
+
+  /* ---------- Header / nav ---------- */
+  header { position: sticky; top: 0; z-index: 60; background: var(--white); border-bottom: 3px solid var(--ink); }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 84px; }
+  .logo { display: flex; align-items: center; gap: 14px; }
+  .logo .badge {
+    width: 52px; height: 52px; flex: none; background: var(--yellow);
+    border: 3px solid var(--ink); display: grid; place-items: center;
+    font-family: "Oswald", sans-serif; font-weight: 700; font-size: 20px; line-height: 0.9;
+    text-align: center; color: var(--ink);
+    transform: rotate(-2deg);
+  }
+  .logo .wordmark { line-height: 1.05; }
+  .logo .wordmark .n1 { font-family: "Oswald", sans-serif; text-transform: uppercase; font-weight: 700; font-size: 22px; letter-spacing: 0.01em; }
+  .logo .wordmark .n2 { display: block; font-size: 10.5px; letter-spacing: 0.32em; text-transform: uppercase; color: var(--steel); font-weight: 600; margin-top: 3px; }
+
+  .nav-right { display: flex; align-items: center; gap: 34px; }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a {
+    font-size: 13.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--ink-2); padding: 4px 0; border-bottom: 3px solid transparent;
+  }
+  .nav-links a:hover { border-color: var(--yellow); }
+  .btn {
+    display: inline-block; font-family: "Oswald", sans-serif; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em;
+    font-size: 14px; padding: 15px 26px; border: 3px solid var(--ink); cursor: pointer;
+    transition: background .12s, color .12s, transform .12s;
+  }
+  .btn-yellow { background: var(--yellow); color: var(--ink); }
+  .btn-yellow:hover { background: var(--ink); color: var(--yellow); }
+  .btn-ghost { background: transparent; color: var(--white); border-color: var(--white); }
+  .btn-ghost:hover { background: var(--white); color: var(--ink); }
+  .btn-ink { background: var(--ink); color: var(--white); }
+  .btn-ink:hover { background: var(--yellow); color: var(--ink); border-color: var(--ink); }
+  .nav .btn { padding: 12px 20px; }
+  .menu-btn { display: none; background: none; border: 3px solid var(--ink); font-size: 20px; padding: 6px 12px; cursor: pointer; }
+
+  .mobile-menu { display: none; background: var(--ink); border-bottom: 3px solid var(--yellow); }
+  .mobile-menu.open { display: block; }
+  .mobile-menu a { display: block; color: #fff; padding: 16px 28px; border-bottom: 1px solid #2f2f2f; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; font-size: 14px; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative; color: var(--white);
+    background-color: var(--ink);
+    background-image:
+      linear-gradient(rgba(20,20,20,0.82), rgba(20,20,20,0.9)),
+      url("https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1600&q=70");
+    background-size: cover;
+    background-position: center;
+    padding: 84px 0 0;
+  }
+  .hero-grid { display: grid; grid-template-columns: 1.4fr 0.9fr; gap: 54px; align-items: center; padding-bottom: 76px; }
+  .hero .tagpill {
+    display: inline-block; background: var(--yellow); color: var(--ink);
+    font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em;
+    padding: 7px 14px; margin-bottom: 24px;
+  }
+  .hero h1 { font-size: 74px; }
+  .hero h1 .mark { color: var(--yellow); }
+  .hero .lead { font-size: 18px; color: #d5d2cb; max-width: 520px; margin-top: 22px; font-weight: 300; }
+  .hero-actions { margin-top: 34px; display: flex; gap: 14px; flex-wrap: wrap; }
+
+  /* Spec placard instead of a mockup */
+  .placard { background: var(--white); color: var(--ink); border: 4px solid var(--yellow); box-shadow: 12px 12px 0 rgba(0,0,0,0.35); }
+  .placard .ph { background: var(--ink); color: var(--yellow); padding: 14px 20px; font-family: "Oswald", sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 14px; display: flex; justify-content: space-between; align-items: center; }
+  .placard .prow { display: flex; justify-content: space-between; gap: 12px; padding: 15px 20px; border-bottom: 1px dashed var(--line); font-size: 14.5px; }
+  .placard .prow:last-child { border-bottom: none; }
+  .placard .prow .k { color: var(--steel); text-transform: uppercase; letter-spacing: 0.06em; font-size: 11.5px; font-weight: 700; }
+  .placard .prow .v { font-weight: 700; text-align: right; }
+
+  /* Hero credential strip */
+  .cred {
+    background: var(--yellow); color: var(--ink);
+    display: grid; grid-template-columns: repeat(4, 1fr);
+  }
+  .cred div { padding: 22px 24px; border-right: 2px solid rgba(0,0,0,0.18); }
+  .cred div:last-child { border-right: none; }
+  .cred .big { font-family: "Oswald", sans-serif; font-weight: 700; text-transform: uppercase; font-size: 29px; line-height: 1; }
+  .cred .sm { font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 5px; }
+
+  /* ---------- Section scaffolding ---------- */
+  section { padding: 90px 0; }
+  .center { text-align: center; }
+  .eyebrow { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; font-size: 13px; color: var(--rust); }
+  .eyebrow::before { content: ""; width: 32px; height: 3px; background: var(--rust); }
+  .center .eyebrow::before { display: none; }
+  .head { font-size: 44px; margin-top: 14px; }
+  .sec-intro { max-width: 620px; margin-bottom: 54px; }
+  .sec-intro.center { margin-left: auto; margin-right: auto; }
+  .sec-intro p { color: var(--steel); font-size: 17px; margin-top: 12px; font-weight: 300; }
+
+  /* ---------- Services: numbered rows ---------- */
+  #services { background: var(--concrete); border-top: 3px solid var(--ink); border-bottom: 3px solid var(--ink); }
+  .svc-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0 56px; }
+  .svc {
+    display: grid; grid-template-columns: auto 1fr; gap: 22px;
+    padding: 30px 0; border-top: 2px solid var(--ink);
+    align-items: start;
+  }
+  .svc .no { font-family: "Oswald", sans-serif; font-weight: 700; font-size: 38px; color: var(--yellow-d); line-height: 0.9; }
+  .svc h3 { font-family: "Oswald","Barlow",sans-serif; text-transform: uppercase; font-weight: 600; font-size: 21px; letter-spacing: 0.01em; margin-bottom: 6px; }
+  .svc p { color: var(--steel); font-size: 15px; }
+
+  /* ---------- Process ---------- */
+  #process { background: var(--paper); border-bottom: 3px solid var(--ink); }
+  .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+  .step { background: var(--white); border: 3px solid var(--ink); padding: 28px 24px; box-shadow: 7px 7px 0 rgba(0,0,0,0.14); }
+  .step .stepno {
+    display: inline-grid; place-items: center; width: 36px; height: 36px;
+    background: var(--ink); color: var(--yellow); font-family: "Oswald", sans-serif;
+    font-weight: 700; font-size: 15px; margin-bottom: 18px;
+  }
+  .step h3 { font-family: "Oswald", sans-serif; text-transform: uppercase; font-weight: 600; font-size: 18.5px; margin-bottom: 8px; letter-spacing: 0.01em; }
+  .step p { color: var(--steel); font-size: 14.5px; }
+
+  /* ---------- Recent work gallery ---------- */
+  #work { background: var(--concrete); border-bottom: 3px solid var(--ink); }
+  .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .shot { border: 3px solid var(--ink); background: var(--white); box-shadow: 8px 8px 0 rgba(0,0,0,0.16); }
+  .shot .img { aspect-ratio: 4 / 3; background-color: var(--concrete-2); background-size: cover; background-position: center; }
+  .shot .cap { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 13px 16px; border-top: 3px solid var(--ink); }
+  .shot .cap b { font-family: "Oswald","Barlow",sans-serif; text-transform: uppercase; font-weight: 600; font-size: 15.5px; letter-spacing: 0.02em; }
+  .shot .cap span { color: var(--steel); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap; }
+
+  /* ---------- Testimonial band ---------- */
+  .band {
+    position: relative; color: var(--white); text-align: center;
+    background-color: var(--ink);
+    background-image:
+      linear-gradient(rgba(15,15,15,0.85), rgba(15,15,15,0.88)),
+      url("https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1600&q=70");
+    background-size: cover; background-position: center;
+    padding: 108px 0;
+  }
+  .band .quote { font-family: "Oswald", sans-serif; font-weight: 500; text-transform: none; letter-spacing: 0.005em; font-size: 32px; max-width: 760px; margin: 0 auto; line-height: 1.35; }
+  .band .who { margin-top: 24px; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: var(--yellow); }
+  .band .stars { color: var(--yellow); font-size: 18px; margin-bottom: 22px; letter-spacing: 4px; }
+
+  /* ---------- About ---------- */
+  #about { background: var(--paper); }
+  .about { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 0; align-items: stretch; }
+  .about .est {
+    background-color: var(--ink); color: var(--white); padding: 56px 46px;
+    background-image:
+      linear-gradient(rgba(20,20,20,0.86), rgba(20,20,20,0.93)),
+      url("https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1000&q=70");
+    background-size: cover; background-position: center;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .about .est .since { font-family: "Oswald", sans-serif; font-weight: 700; text-transform: uppercase; font-size: 21px; letter-spacing: 0.1em; color: var(--yellow); }
+  .about .est .year { font-family: "Oswald", sans-serif; font-weight: 700; font-size: 116px; line-height: 0.85; margin: 6px 0 18px; }
+  .about .est p { color: #cbc8c1; font-size: 15.5px; font-weight: 300; }
+  .about .est .sig { margin-top: 26px; padding-top: 22px; border-top: 1px solid #3a3a3a; font-size: 14px; color: #a5a29b; }
+  .about .est .sig b { color: var(--white); font-size: 16px; display: block; font-weight: 600; }
+  .about .body { background: var(--white); border: 3px solid var(--ink); border-left: none; padding: 52px 46px; }
+  .about .body h2 { font-size: 38px; margin: 12px 0 18px; }
+  .about .body > p { color: var(--steel); font-size: 16.5px; margin-bottom: 12px; font-weight: 300; }
+  .checks { list-style: none; margin-top: 24px; display: grid; gap: 14px; }
+  .checks li { display: flex; gap: 14px; align-items: flex-start; font-size: 15.5px; }
+  .checks .cbox { width: 24px; height: 24px; flex: none; background: var(--yellow); border: 2px solid var(--ink); display: grid; place-items: center; font-weight: 900; font-size: 14px; }
+  .checks b { display: block; font-weight: 600; }
+
+  /* Crew strip */
+  .crew { display: flex; gap: 24px; margin-top: 30px; padding-top: 28px; border-top: 2px dashed var(--line); }
+  .crew-card { display: flex; align-items: center; gap: 14px; }
+  .crew-badge {
+    width: 50px; height: 50px; flex: none; background: var(--yellow); border: 3px solid var(--ink);
+    display: grid; place-items: center; font-family: "Oswald", sans-serif; font-weight: 700; font-size: 15px;
+  }
+  .crew-card:nth-child(1) .crew-badge { transform: rotate(-3deg); }
+  .crew-card:nth-child(2) .crew-badge { transform: rotate(2deg); }
+  .crew-card b { display: block; font-size: 15px; }
+  .crew-card span { display: block; font-size: 12.5px; color: var(--steel); text-transform: uppercase; letter-spacing: 0.04em; font-weight: 600; }
+
+  /* ---------- Contact ---------- */
+  #contact { background: var(--concrete-2); border-top: 3px solid var(--ink); }
+  .contact-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 48px; align-items: start; }
+  .cinfo { display: grid; gap: 0; border: 3px solid var(--ink); background: var(--white); }
+  .cinfo .row { display: flex; gap: 16px; align-items: center; padding: 22px 24px; border-bottom: 2px solid var(--ink); }
+  .cinfo .row:last-child { border-bottom: none; }
+  .cinfo .ic { width: 44px; height: 44px; flex: none; background: var(--ink); color: var(--yellow); display: grid; place-items: center; font-size: 20px; }
+  .cinfo .k { font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--steel); }
+  .cinfo .v { font-size: 17px; font-weight: 700; }
+  .cinfo .hours { background: var(--yellow); padding: 20px 24px; font-size: 14.5px; font-weight: 500; }
+  .cinfo .hours b { text-transform: uppercase; letter-spacing: 0.06em; }
+
+  form.quote { background: var(--white); border: 3px solid var(--ink); padding: 34px; }
+  form.quote h3 { font-family: "Oswald","Barlow",sans-serif; text-transform: uppercase; font-weight: 700; font-size: 25px; margin-bottom: 4px; }
+  form.quote .sub { color: var(--steel); font-size: 14.5px; margin-bottom: 24px; font-weight: 300; }
+  .frow { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .fg { margin-bottom: 16px; }
+  .fg label { display: block; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink); margin-bottom: 6px; }
+  .fg input, .fg select, .fg textarea {
+    width: 100%; padding: 12px 14px; border: 2px solid var(--ink); background: var(--paper);
+    font-size: 15px; font-family: inherit; color: var(--ink);
+  }
+  .fg input:focus, .fg select:focus, .fg textarea:focus { outline: 3px solid var(--yellow); outline-offset: -2px; }
+  .fg textarea { resize: vertical; min-height: 100px; }
+  form.quote .btn-ink { width: 100%; margin-top: 4px; }
+
+  /* ---------- Footer ---------- */
+  footer { background: var(--ink); color: #928f88; }
+  .foot { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; padding: 34px 0; font-size: 13.5px; }
+  .foot .fname { font-family: "Oswald", sans-serif; text-transform: uppercase; font-weight: 700; font-size: 19px; color: var(--white); letter-spacing: 0.02em; }
+  .foot .fname span { color: var(--yellow); }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 940px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+    .placard { max-width: 460px; }
+    .process-grid { grid-template-columns: 1fr 1fr; }
+    .about { grid-template-columns: 1fr; }
+    .about .body { border-left: 3px solid var(--ink); border-top: none; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 58px; }
+    .band .quote { font-size: 27px; }
+  }
+  @media (max-width: 720px) {
+    .topbar .tb-right span { display: inline; }
+    .nav-links, .nav .btn { display: none; }
+    .menu-btn { display: block; }
+    .svc-list { grid-template-columns: 1fr; gap: 0; }
+    .process-grid { grid-template-columns: 1fr; }
+    .gallery { grid-template-columns: 1fr; }
+    .cred { grid-template-columns: 1fr 1fr; }
+    .cred div:nth-child(2) { border-right: none; }
+    .cred div:nth-child(1), .cred div:nth-child(2) { border-bottom: 2px solid rgba(0,0,0,0.18); }
+    .frow { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 44px; }
+    .head, .about .body h2 { font-size: 32px; }
+    section { padding: 64px 0; }
+    .about .est .year { font-size: 88px; }
+    .crew { flex-direction: column; gap: 18px; }
+    .band { padding: 76px 0; }
+    .band .quote { font-size: 23px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Top utility bar -->
+<div class="topbar">
+  <div class="wrap">
+    <div>Licensed &amp; Insured &middot; VA Class A Contractor &middot; <b>Free Estimates</b></div>
+    <div class="tb-right">
+      <a href="tel:+18045550142"><b>&#9742;</b> (804) 555-0142</a>
+      <span>Richmond, VA</span>
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="logo">
+      <span class="badge">R&amp;S</span>
+      <span class="wordmark">
+        <span class="n1">Ridge &amp; Sons</span>
+        <span class="n2">Construction</span>
+      </span>
+    </a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="#contact" class="btn btn-yellow">Get a Quote</a>
+      <button class="menu-btn" aria-label="Menu" onclick="document.getElementById('mm').classList.toggle('open')">&#9776;</button>
+    </div>
+  </div>
+</header>
+<nav class="mobile-menu" id="mm">
+  <a href="#services" onclick="document.getElementById('mm').classList.remove('open')">Services</a>
+  <a href="#process" onclick="document.getElementById('mm').classList.remove('open')">Process</a>
+  <a href="#work" onclick="document.getElementById('mm').classList.remove('open')">Work</a>
+  <a href="#about" onclick="document.getElementById('mm').classList.remove('open')">About</a>
+  <a href="#contact" onclick="document.getElementById('mm').classList.remove('open')">Contact</a>
+</nav>
+
+<main id="top">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="tagpill">Richmond &amp; Central Virginia</span>
+        <h1 class="display">We Build It <span class="mark">Right</span> The First Time.</h1>
+        <p class="lead">Ridge &amp; Sons is a family-run general contractor putting three decades of honest craftsmanship into every remodel, addition, and repair across the Richmond area.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-yellow">Get a Free Estimate</a>
+          <a href="#services" class="btn btn-ghost">Our Services</a>
+        </div>
+      </div>
+
+      <!-- Spec placard -->
+      <div class="placard">
+        <div class="ph"><span>Job Sheet</span><span>&#9873;</span></div>
+        <div class="prow"><span class="k">Established</span><span class="v">1992</span></div>
+        <div class="prow"><span class="k">License</span><span class="v">VA Class A #2705</span></div>
+        <div class="prow"><span class="k">Coverage</span><span class="v">Fully Insured</span></div>
+        <div class="prow"><span class="k">Service Area</span><span class="v">Greater Richmond</span></div>
+        <div class="prow"><span class="k">Estimates</span><span class="v">Free &amp; Written</span></div>
+      </div>
+    </div>
+
+    <!-- Credential strip -->
+    <div class="cred">
+      <div><div class="big">30+</div><div class="sm">Years Building</div></div>
+      <div><div class="big">1,200+</div><div class="sm">Projects Done</div></div>
+      <div><div class="big">4.9&#9733;</div><div class="sm">Homeowner Rating</div></div>
+      <div><div class="big">A+</div><div class="sm">BBB Accredited</div></div>
+    </div>
+  </section>
+
+  <div class="hazard"></div>
+
+  <!-- Services -->
+  <section id="services">
+    <div class="wrap">
+      <div class="sec-intro">
+        <span class="eyebrow">What We Do</span>
+        <h2 class="display head">Full-Service Contracting</h2>
+        <p>One crew, start to finish &mdash; from a single repair to a full renovation, handled on schedule and on budget.</p>
+      </div>
+      <div class="svc-list">
+        <div class="svc"><div class="no">01</div><div><h3>Kitchen &amp; Bath Remodels</h3><p>Tear-out to tile. We rebuild the rooms you use most with quality materials and clean, lasting workmanship.</p></div></div>
+        <div class="svc"><div class="no">02</div><div><h3>Room Additions</h3><p>Bump-outs, garages, and second-story builds framed to match your home and add real, appraised value.</p></div></div>
+        <div class="svc"><div class="no">03</div><div><h3>Roofing &amp; Siding</h3><p>Durable roofing, siding, and gutters that stand up to every Virginia storm season, installed to code.</p></div></div>
+        <div class="svc"><div class="no">04</div><div><h3>Decks &amp; Porches</h3><p>Custom decks, screened porches, and outdoor living spaces built to carry years of family use.</p></div></div>
+        <div class="svc"><div class="no">05</div><div><h3>Repairs &amp; Carpentry</h3><p>Framing, drywall, doors, trim, and the punch-list fixes other contractors won't call you back about.</p></div></div>
+        <div class="svc"><div class="no">06</div><div><h3>New Construction</h3><p>Ground-up builds and detached structures, managed by a crew you can trust to do it by the book.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section id="process">
+    <div class="wrap">
+      <div class="sec-intro center">
+        <span class="eyebrow">How We Work</span>
+        <h2 class="display head">From First Call To Final Walkthrough</h2>
+        <p>A straightforward process, the same for every job &mdash; no surprises along the way.</p>
+      </div>
+      <div class="process-grid">
+        <div class="step">
+          <div class="stepno">01</div>
+          <h3>Free Estimate</h3>
+          <p>Walk the job with an owner, get a written estimate &mdash; usually within 48 hours, no pressure.</p>
+        </div>
+        <div class="step">
+          <div class="stepno">02</div>
+          <h3>Plan &amp; Permit</h3>
+          <p>We lock in materials, schedule, and any permits needed before a single tool touches your home.</p>
+        </div>
+        <div class="step">
+          <div class="stepno">03</div>
+          <h3>Build</h3>
+          <p>Your crew shows up on time and stays until it's done right, with daily cleanup along the way.</p>
+        </div>
+        <div class="step">
+          <div class="stepno">04</div>
+          <h3>Walkthrough &amp; Warranty</h3>
+          <p>We inspect the finished work together and back it with a written workmanship warranty.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recent work -->
+  <section id="work">
+    <div class="wrap">
+      <div class="sec-intro">
+        <span class="eyebrow">Recent Work</span>
+        <h2 class="display head">Built Around Richmond</h2>
+        <p>A look at some of the homes we've remodeled, added onto, and built from the ground up.</p>
+      </div>
+      <div class="gallery">
+        <div class="shot">
+          <div class="img" style="background-image:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=70')"></div>
+          <div class="cap"><b>Rear Addition</b><span>Midlothian</span></div>
+        </div>
+        <div class="shot">
+          <div class="img" style="background-image:url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=70')"></div>
+          <div class="cap"><b>Interior Remodel</b><span>The Fan</span></div>
+        </div>
+        <div class="shot">
+          <div class="img" style="background-image:url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=70')"></div>
+          <div class="cap"><b>New Build</b><span>Short Pump</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonial -->
+  <section class="band">
+    <div class="wrap">
+      <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="quote">&ldquo;Dave and his crew treated our house like it was their own. Clear pricing up front, showed up when they said they would, and the addition looks like it was always part of the house.&rdquo;</p>
+      <p class="who">Sarah &amp; Mike T. &middot; The Fan</p>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" style="padding-bottom:0; padding-top:0;">
+    <div class="wrap" style="padding:0;">
+      <div class="about">
+        <div class="est">
+          <span class="since">Established</span>
+          <span class="year display">1992</span>
+          <p>Founded by Richmond native Tom Ridge on a simple rule: show up on time, do the job right, and stand behind it.</p>
+          <div class="sig">
+            <b>Dave &amp; Mark Ridge</b>
+            Owners &amp; Lead Builders
+          </div>
+        </div>
+        <div class="body">
+          <span class="eyebrow">Who We Are</span>
+          <h2 class="display">A Family Name On Every Job</h2>
+          <p>Three decades in, Tom's sons run the crews with the same standards he started with. We take on the work we can do well and treat your home like it's our own.</p>
+          <p>We're straight with you about cost and timeline from day one &mdash; no surprises, no runaround, no disappearing after the deposit.</p>
+          <ul class="checks">
+            <li><span class="cbox">&#10003;</span><span><b>Licensed, bonded &amp; insured</b> &mdash; VA Class A contractor, fully covered on every job.</span></li>
+            <li><span class="cbox">&#10003;</span><span><b>One point of contact</b> &mdash; you work directly with an owner, not a call center.</span></li>
+            <li><span class="cbox">&#10003;</span><span><b>Written estimates &amp; clear timelines</b> &mdash; you know the price and the plan before we start.</span></li>
+            <li><span class="cbox">&#10003;</span><span><b>Workmanship warranty</b> &mdash; we stand behind what we build, in writing.</span></li>
+          </ul>
+          <div class="crew">
+            <div class="crew-card"><div class="crew-badge">DR</div><div><b>Dave Ridge</b><span>Owner &amp; Lead Builder</span></div></div>
+            <div class="crew-card"><div class="crew-badge">MR</div><div><b>Mark Ridge</b><span>Owner &amp; Lead Builder</span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="hazard"></div>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="sec-intro">
+        <span class="eyebrow">Get In Touch</span>
+        <h2 class="display head">Request A Free Estimate</h2>
+        <p>Tell us about your project. We'll get back to you within one business day &mdash; usually the same day.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="cinfo">
+          <div class="row"><div class="ic">&#9742;</div><div><div class="k">Call or Text</div><div class="v">(804) 555-0142</div></div></div>
+          <div class="row"><div class="ic">&#9993;</div><div><div class="k">Email</div><div class="v">info@ridgeandsons.com</div></div></div>
+          <div class="row"><div class="ic">&#9873;</div><div><div class="k">Shop</div><div class="v">1420 Commerce Road, Richmond, VA 23224</div></div></div>
+          <div class="hours"><b>Hours:</b> Mon&ndash;Fri 7:00a&ndash;5:00p &middot; Sat by appointment &middot; Emergency repairs available.</div>
+        </div>
+
+        <form class="quote" onsubmit="event.preventDefault(); this.reset(); alert('Thanks! Your estimate request has been received. We\'ll be in touch within one business day.');">
+          <h3>Start Your Project</h3>
+          <p class="sub">No obligation &mdash; just an honest conversation about what you need.</p>
+          <div class="frow">
+            <div class="fg"><label for="name">Name</label><input id="name" name="name" type="text" required placeholder="Full name"></div>
+            <div class="fg"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" required placeholder="(804) 555-0000"></div>
+          </div>
+          <div class="fg"><label for="email">Email</label><input id="email" name="email" type="email" placeholder="you@email.com"></div>
+          <div class="fg"><label for="type">Project Type</label>
+            <select id="type" name="type">
+              <option>Kitchen &amp; Bath Remodel</option>
+              <option>Room Addition</option>
+              <option>Roofing &amp; Siding</option>
+              <option>Deck or Porch</option>
+              <option>Repair / Carpentry</option>
+              <option>New Construction</option>
+              <option>Something Else</option>
+            </select>
+          </div>
+          <div class="fg"><label for="msg">Project Details</label><textarea id="msg" name="msg" placeholder="Tell us a bit about the job."></textarea></div>
+          <button type="submit" class="btn btn-ink">Send Estimate Request</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="hazard"></div>
+
+<!-- Footer -->
+<footer>
+  <div class="wrap foot">
+    <span class="fname">Ridge &amp; Sons<span>.</span> Construction</span>
+    <span>&copy; 2026 Ridge &amp; Sons Construction, LLC &middot; Richmond, VA &middot; VA Class A License #2705-XXXXXX</span>
+  </div>
+</footer>
+
+</body>
+</html>
