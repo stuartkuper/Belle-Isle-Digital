@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<title>Ember &amp; Oak Coffee Co. &mdash; Small-Batch Coffee in Richmond, Virginia</title>
+<meta name="description" content="Ember & Oak Coffee Co. is a cozy, small-batch coffee shop and roastery in Church Hill, Richmond, Virginia. House-roasted coffee, fresh pastries, and an unhurried morning.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Caveat:wght@600;700&family=DM+Sans:opsz,wght@9..40,300..600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper:     #f4ece0;
+    --sand:      #ece0cd;
+    --sand-2:    #e2d3ba;
+    --oat:       #d8c6a8;
+    --espresso:  #241812;
+    --espresso-2:#33251c;
+    --coffee:    #6f4a2b;
+    --coffee-d:  #543516;
+    --ember:     #bf5a2e;
+    --ember-d:   #a24521;
+    --caramel:   #cf9b5b;
+    --muted:     #83705b;
+    --muted-lt:  #b6a488;
+    --line:      #e0d1b7;
+    --line-dk:   #493527;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "DM Sans", system-ui, sans-serif;
+    color: var(--espresso);
+    background: var(--paper);
+    line-height: 1.7;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4, .display { font-family: "Bricolage Grotesque", Georgia, serif; font-weight: 700; line-height: 1.05; letter-spacing: -0.015em; }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+  .script { font-family: "Caveat", cursive; font-weight: 700; }
+
+  .wrap { width: 100%; max-width: 1160px; margin: 0 auto; padding: 0 32px; }
+
+  .eyebrow { font-size: 12px; text-transform: uppercase; letter-spacing: 0.26em; color: var(--ember); font-weight: 600; }
+  .script-accent { font-family: "Caveat", cursive; font-weight: 700; font-size: 30px; color: var(--coffee); display: block; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 9px; font-family: "DM Sans", sans-serif; font-weight: 600;
+    font-size: 13px; text-transform: uppercase; letter-spacing: 0.12em;
+    padding: 15px 30px; cursor: pointer; transition: background .2s, color .2s, border-color .2s, transform .2s;
+    border: 1.5px solid transparent; border-radius: 40px;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-solid { background: var(--ember); color: var(--paper); }
+  .btn-solid:hover { background: var(--ember-d); }
+  .btn-dark { background: var(--espresso); color: var(--paper); }
+  .btn-dark:hover { background: var(--espresso-2); }
+  .btn-outline { background: transparent; color: var(--espresso); border-color: var(--coffee); }
+  .btn-outline:hover { background: var(--coffee); color: var(--paper); }
+  .btn-ghost { background: transparent; color: #fff; border-color: rgba(255,255,255,0.55); }
+  .btn-ghost:hover { background: #fff; color: var(--espresso); }
+
+  /* ---------- Header ---------- */
+  header { position: sticky; top: 0; z-index: 60; background: rgba(244,236,224,0.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  .topline { height: 3px; background: linear-gradient(90deg, var(--coffee), var(--ember), var(--caramel)); }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 82px; }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand .mark {
+    width: 42px; height: 42px; border-radius: 50%; flex-shrink: 0;
+    background: radial-gradient(circle at 32% 30%, var(--ember), var(--coffee) 70%);
+    display: grid; place-items: center; color: var(--paper); font-family: "Bricolage Grotesque", serif; font-weight: 800; font-size: 19px;
+    box-shadow: inset 0 0 0 3px rgba(255,255,255,0.14);
+  }
+  .brand .bt { line-height: 1.05; }
+  .brand .b1 { font-family: "Bricolage Grotesque", serif; font-weight: 800; font-size: 21px; letter-spacing: -0.01em; color: var(--espresso); }
+  .brand .b2 { display: block; font-size: 9px; text-transform: uppercase; letter-spacing: 0.28em; color: var(--muted); margin-top: 3px; }
+  .nav-right { display: flex; align-items: center; gap: 34px; }
+  .nav-links { display: flex; align-items: center; gap: 30px; list-style: none; }
+  .nav-links a { font-size: 13px; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 500; color: var(--espresso); position: relative; padding: 4px 0; }
+  .nav-links a::after { content: ""; position: absolute; left: 0; bottom: 0; width: 0; height: 2px; background: var(--ember); transition: width .25s; }
+  .nav-links a:hover::after { width: 100%; }
+  .menu-btn { display: none; background: none; border: none; font-size: 24px; cursor: pointer; color: var(--espresso); }
+
+  .mobile-menu { display: none; background: var(--sand); border-bottom: 1px solid var(--line); }
+  .mobile-menu.open { display: block; }
+  .mobile-menu a { display: block; padding: 15px 32px; border-bottom: 1px solid var(--line); text-transform: uppercase; letter-spacing: 0.12em; font-size: 13px; font-weight: 500; }
+  .mobile-menu a.cta { color: var(--ember); font-weight: 700; border-bottom: none; }
+
+  /* ---------- Hero ---------- */
+  .hero { position: relative; overflow: hidden; background:
+      radial-gradient(120% 90% at 85% 0%, var(--sand) 0%, var(--paper) 55%); }
+  .hero-grid { display: grid; grid-template-columns: 1.02fr 0.98fr; gap: 60px; align-items: center; padding-top: 96px; padding-bottom: 104px; }
+  .hero-copy .script-accent { margin-bottom: 6px; font-size: 32px; color: var(--ember); }
+  .hero-copy h1 { font-size: 66px; font-weight: 800; }
+  .hero-copy h1 em { font-style: normal; color: var(--ember); }
+  .hero-copy .lead { font-size: 18px; color: var(--muted); margin-top: 22px; max-width: 460px; }
+  .hero-actions { margin-top: 34px; display: flex; gap: 14px; flex-wrap: wrap; }
+  .hero-meta { margin-top: 32px; display: flex; align-items: center; gap: 18px; flex-wrap: wrap; font-size: 12.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+  .hero-meta .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--caramel); }
+
+  .hero-visual { position: relative; }
+  .hero-visual .photo {
+    position: relative; z-index: 2; aspect-ratio: 5 / 6; border-radius: 220px 220px 20px 20px;
+    background-color: var(--sand-2); background-size: cover; background-position: center;
+    box-shadow: 0 34px 60px rgba(36,24,18,0.24);
+  }
+  .hero-visual::before {
+    content: ""; position: absolute; z-index: 1; inset: 26px -22px -22px 40px; border-radius: 200px 200px 20px 20px;
+    background: repeating-linear-gradient(45deg, var(--oat) 0 10px, transparent 10px 20px); opacity: 0.5;
+  }
+  .brew-card {
+    position: absolute; z-index: 3; left: -22px; bottom: 42px;
+    background: var(--paper); border: 1px solid var(--line); border-radius: 16px; padding: 14px 18px;
+    box-shadow: 0 18px 40px rgba(36,24,18,0.18); display: flex; align-items: center; gap: 13px;
+  }
+  .brew-card .bdot { width: 38px; height: 38px; border-radius: 50%; background: var(--espresso); color: var(--caramel); display: grid; place-items: center; font-size: 19px; }
+  .brew-card .k { font-size: 10px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--muted); }
+  .brew-card .v { font-family: "Bricolage Grotesque", serif; font-weight: 700; font-size: 15px; color: var(--espresso); }
+
+  /* ---------- Section scaffolding ---------- */
+  section { padding: 100px 0; }
+  .center { text-align: center; }
+  .sec-head { max-width: 620px; margin-bottom: 58px; }
+  .sec-head.center { margin-left: auto; margin-right: auto; }
+  .sec-head .eyebrow { display: block; margin-bottom: 14px; }
+  .sec-head h2 { font-size: 46px; }
+  .sec-head p { color: var(--muted); font-size: 17px; margin-top: 14px; }
+  .sec-head.on-dark h2 { color: var(--paper); }
+  .sec-head.on-dark p { color: var(--muted-lt); }
+  .sec-head.on-dark .eyebrow { color: var(--caramel); }
+
+  /* ---------- Menu (chalkboard) ---------- */
+  #menu { background: var(--espresso); color: var(--paper);
+    background-image: radial-gradient(120% 80% at 50% -10%, rgba(191,90,46,0.14), transparent 60%); }
+  .featured { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; margin-bottom: 64px; }
+  .drink { background: var(--espresso-2); border: 1px solid var(--line-dk); border-radius: 18px; overflow: hidden; transition: transform .25s, box-shadow .25s; }
+  .drink:hover { transform: translateY(-6px); box-shadow: 0 24px 46px rgba(0,0,0,0.34); }
+  .drink .img { aspect-ratio: 4 / 3; background-color: #4a3527; background-size: cover; background-position: center; }
+  .drink .body { padding: 22px 22px 26px; }
+  .drink .cat { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--caramel); font-weight: 600; }
+  .drink h3 { font-size: 22px; margin: 8px 0 6px; display: flex; justify-content: space-between; align-items: baseline; gap: 10px; color: var(--paper); }
+  .drink h3 .p { font-family: "Bricolage Grotesque", serif; color: var(--ember); font-size: 19px; white-space: nowrap; }
+  .drink p { color: var(--muted-lt); font-size: 14px; }
+
+  .menu-lists { display: grid; grid-template-columns: 1fr 1fr; gap: 44px 72px; }
+  .mlist h3 { font-size: 24px; color: var(--paper); display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .mlist h3 .ic { color: var(--caramel); font-size: 20px; }
+  .mrow { display: flex; align-items: baseline; gap: 12px; padding: 11px 0; border-bottom: 1px solid var(--line-dk); }
+  .mrow .n { font-size: 15.5px; color: #f0e6d7; font-weight: 400; }
+  .mrow .n small { display: block; font-size: 12.5px; color: var(--muted-lt); }
+  .mrow .dots { flex: 1; border-bottom: 1px dotted #6b513e; transform: translateY(-3px); }
+  .mrow .pr { font-family: "Bricolage Grotesque", serif; font-size: 18px; font-weight: 700; color: var(--caramel); white-space: nowrap; }
+  .menu-foot { margin-top: 50px; text-align: center; font-family: "Caveat", cursive; font-size: 26px; color: var(--caramel); }
+
+  /* ---------- Story / About ---------- */
+  #story { background: var(--paper); }
+  .story-grid { display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 70px; align-items: center; }
+  .story-img { position: relative; }
+  .story-img .pic { position: relative; overflow: hidden; aspect-ratio: 4 / 5; background-color: var(--sand-2); background-size: cover; background-position: center; border-radius: 20px; box-shadow: 0 26px 52px rgba(36,24,18,0.2); }
+  .story-img .est { position: absolute; right: -18px; bottom: -18px; background: var(--ember); color: var(--paper); border-radius: 16px; padding: 16px 20px; text-align: center; box-shadow: 0 16px 34px rgba(36,24,18,0.24); }
+  .story-img .est .n { font-family: "Bricolage Grotesque", serif; font-weight: 800; font-size: 30px; line-height: 1; }
+  .story-img .est .l { font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.18em; margin-top: 5px; }
+  .story-copy .script-accent { margin-bottom: 2px; }
+  .story-copy h2 { font-size: 44px; margin-top: 2px; }
+  .story-copy p { color: var(--muted); font-size: 16.5px; margin-top: 16px; }
+  .story-stats { display: flex; gap: 40px; margin-top: 34px; flex-wrap: wrap; }
+  .story-stats .s .n { font-family: "Bricolage Grotesque", serif; font-weight: 800; font-size: 30px; color: var(--coffee); }
+  .story-stats .s .l { font-size: 12px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-top: 4px; }
+  .story-copy .sign { margin-top: 28px; font-family: "Caveat", cursive; font-weight: 700; font-size: 30px; color: var(--ember); }
+  .story-copy .sign small { display: block; font-family: "DM Sans", sans-serif; font-weight: 400; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-top: 2px; }
+
+  /* ---------- Roastery band ---------- */
+  .band {
+    background-color: var(--espresso); color: var(--paper); text-align: center;
+    background-image: linear-gradient(rgba(30,19,13,0.74), rgba(30,19,13,0.82)),
+      url("https://images.unsplash.com/photo-1524350876685-274059332603?auto=format&fit=crop&w=1600&q=75");
+    background-size: cover; background-position: center; padding: 116px 0;
+  }
+  .band .script-accent { color: var(--caramel); font-size: 38px; }
+  .band .q { font-family: "Bricolage Grotesque", serif; font-weight: 700; font-size: 40px; max-width: 760px; margin: 6px auto 0; line-height: 1.15; }
+  .band .who { margin-top: 20px; font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--muted-lt); }
+
+  /* ---------- Visit / Contact ---------- */
+  #visit { background: var(--sand); }
+  .visit-grid { display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 56px; align-items: start; }
+  .visit-info .block { margin-bottom: 30px; }
+  .visit-info .k { font-size: 11px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--ember); font-weight: 600; margin-bottom: 8px; }
+  .visit-info .big { font-family: "Bricolage Grotesque", serif; font-weight: 700; font-size: 21px; color: var(--espresso); }
+  .visit-info p { color: var(--muted); font-size: 15.5px; }
+  .visit-info a { color: var(--coffee); font-weight: 500; }
+  .visit-info a:hover { color: var(--ember); }
+  .hours { margin-top: 6px; }
+  .hours .hr { display: flex; justify-content: space-between; gap: 16px; padding: 7px 0; border-bottom: 1px solid var(--line); font-size: 15px; color: var(--muted); max-width: 340px; }
+  .hours .hr b { color: var(--espresso); font-weight: 600; }
+
+  .contact-card { background: var(--paper); border: 1px solid var(--line); border-radius: 20px; padding: 34px 32px; box-shadow: 0 20px 46px rgba(36,24,18,0.1); }
+  .contact-card h3 { font-size: 26px; margin-bottom: 4px; }
+  .contact-card .fsub { color: var(--muted); font-size: 14.5px; margin-bottom: 24px; }
+  .frow { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .fg { margin-bottom: 16px; }
+  .fg label { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 7px; }
+  .fg input, .fg select, .fg textarea {
+    width: 100%; padding: 13px 15px; border: 1px solid var(--line); background: var(--sand);
+    font-family: "DM Sans", sans-serif; font-size: 15px; color: var(--espresso); border-radius: 10px;
+  }
+  .fg input:focus, .fg select:focus, .fg textarea:focus { outline: none; border-color: var(--ember); box-shadow: 0 0 0 3px rgba(191,90,46,0.14); background: var(--paper); }
+  .fg textarea { resize: vertical; min-height: 96px; }
+  .contact-card .btn-solid { width: 100%; justify-content: center; }
+
+  /* ---------- Footer ---------- */
+  footer { background: var(--espresso); color: var(--muted-lt); }
+  footer .fbar { height: 4px; background: linear-gradient(90deg, var(--coffee), var(--ember), var(--caramel)); }
+  .foot { padding: 60px 0 30px; text-align: center; }
+  .foot .mark { width: 48px; height: 48px; border-radius: 50%; margin: 0 auto 16px; background: radial-gradient(circle at 32% 30%, var(--ember), var(--coffee) 70%); display: grid; place-items: center; color: var(--paper); font-family: "Bricolage Grotesque", serif; font-weight: 800; font-size: 21px; box-shadow: inset 0 0 0 3px rgba(255,255,255,0.14); }
+  .foot .b1 { font-family: "Bricolage Grotesque", serif; font-size: 28px; font-weight: 800; color: var(--paper); }
+  .foot .b2 { font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.3em; color: var(--caramel); margin-top: 8px; }
+  .foot p { font-size: 14.5px; margin: 18px auto 0; max-width: 420px; }
+  .foot .fnav { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; gap: 28px; margin-top: 26px; }
+  .foot .fnav a { font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted-lt); }
+  .foot .fnav a:hover { color: var(--paper); }
+  .foot .fcontact { margin-top: 22px; font-size: 14px; }
+  .foot .fcontact a { color: var(--caramel); }
+  .foot-bottom { border-top: 1px solid var(--line-dk); padding: 20px 0; text-align: center; font-size: 12.5px; color: #8a7660; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 940px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 54px; }
+    .hero-visual { max-width: 420px; }
+    .hero-copy h1 { font-size: 54px; }
+    .featured { grid-template-columns: 1fr; max-width: 420px; margin-left: auto; margin-right: auto; margin-bottom: 54px; }
+    .menu-lists { grid-template-columns: 1fr; gap: 38px; }
+    .story-grid { grid-template-columns: 1fr; gap: 60px; }
+    .story-img { max-width: 420px; }
+    .visit-grid { grid-template-columns: 1fr; gap: 44px; }
+  }
+  @media (max-width: 680px) {
+    .nav-links { display: none; }
+    .menu-btn { display: block; }
+    .hero-copy h1 { font-size: 42px; }
+    .sec-head h2, .story-copy h2 { font-size: 33px; }
+    .band .q { font-size: 28px; }
+    .frow { grid-template-columns: 1fr; }
+    section { padding: 72px 0; }
+    .band { padding: 84px 0; }
+    .contact-card { padding: 26px 22px; }
+    .brew-card { left: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <div class="topline"></div>
+  <div class="wrap nav">
+    <a href="#top" class="brand">
+      <span class="mark">E</span>
+      <span class="bt">
+        <span class="b1">Ember &amp; Oak</span>
+        <span class="b2">Coffee Co. &middot; Richmond</span>
+      </span>
+    </a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#story">Our Story</a></li>
+        <li><a href="#visit">Visit</a></li>
+      </ul>
+      <a href="#visit" class="btn btn-solid">Order Ahead</a>
+    </div>
+    <button class="menu-btn" aria-label="Menu" onclick="document.getElementById('mm').classList.toggle('open')">&#9776;</button>
+  </div>
+  <nav class="mobile-menu" id="mm">
+    <a href="#menu" onclick="document.getElementById('mm').classList.remove('open')">Menu</a>
+    <a href="#story" onclick="document.getElementById('mm').classList.remove('open')">Our Story</a>
+    <a href="#visit" onclick="document.getElementById('mm').classList.remove('open')">Visit</a>
+    <a href="#visit" class="cta" onclick="document.getElementById('mm').classList.remove('open')">Order Ahead</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <span class="script-accent">freshly brewed</span>
+          <h1>Coffee worth <em>slowing down</em> for.</h1>
+          <p class="lead">A cozy corner roastery in Church Hill, pouring small-batch coffee, warm pastries, and unhurried mornings &mdash; one cup at a time.</p>
+          <div class="hero-actions">
+            <a href="#menu" class="btn btn-solid">See the Menu</a>
+            <a href="#visit" class="btn btn-outline">Find the Shop</a>
+          </div>
+          <div class="hero-meta">
+            <span>Open 7am daily</span><span class="dot"></span>
+            <span>Roasted in-house</span><span class="dot"></span>
+            <span>Church Hill, RVA</span>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="photo" style="background-image:url('https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=900&q=75')"></div>
+          <div class="brew-card">
+            <span class="bdot">&#9749;</span>
+            <span>
+              <span class="k">Now brewing</span>
+              <span class="v">Ethiopia Yirgacheffe</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Menu -->
+  <section id="menu">
+    <div class="wrap">
+      <div class="sec-head center on-dark">
+        <span class="eyebrow">From the Bar</span>
+        <h2>The Menu</h2>
+        <p>House-roasted beans, milk from a farm down the road, and pastries baked before sunrise. Everything made to order.</p>
+      </div>
+
+      <!-- Featured drinks -->
+      <div class="featured">
+        <div class="drink">
+          <div class="img" style="background-image:url('https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=800&q=70')"></div>
+          <div class="body">
+            <span class="cat">Espresso Bar</span>
+            <h3>Signature Latte <span class="p">$5.50</span></h3>
+            <p>House espresso, silky steamed milk, and a whisper of house vanilla.</p>
+          </div>
+        </div>
+        <div class="drink">
+          <div class="img" style="background-image:url('https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=800&q=70')"></div>
+          <div class="body">
+            <span class="cat">Seasonal</span>
+            <h3>Maple Oat Cortado <span class="p">$4.75</span></h3>
+            <p>A double shot cut with oat milk and a drizzle of Virginia maple.</p>
+          </div>
+        </div>
+        <div class="drink">
+          <div class="img" style="background-image:url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=70')"></div>
+          <div class="body">
+            <span class="cat">Filter</span>
+            <h3>Slow Pour-Over <span class="p">$5.00</span></h3>
+            <p>Single-origin, brewed by hand to order &mdash; bright, clean, worth the wait.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Text menu lists -->
+      <div class="menu-lists">
+        <div class="mlist">
+          <h3><span class="ic">&#9749;</span> Espresso &amp; Brew</h3>
+          <div class="mrow"><span class="n">Espresso <small>single / double</small></span><span class="dots"></span><span class="pr">$3.00</span></div>
+          <div class="mrow"><span class="n">Cappuccino</span><span class="dots"></span><span class="pr">$4.50</span></div>
+          <div class="mrow"><span class="n">Flat White</span><span class="dots"></span><span class="pr">$4.75</span></div>
+          <div class="mrow"><span class="n">Mocha <small>dark or white</small></span><span class="dots"></span><span class="pr">$5.25</span></div>
+          <div class="mrow"><span class="n">Drip Coffee <small>free refills</small></span><span class="dots"></span><span class="pr">$3.25</span></div>
+          <div class="mrow"><span class="n">Cold Brew</span><span class="dots"></span><span class="pr">$4.50</span></div>
+        </div>
+        <div class="mlist">
+          <h3><span class="ic">&#127849;</span> Bakery &amp; Not-Coffee</h3>
+          <div class="mrow"><span class="n">Butter Croissant</span><span class="dots"></span><span class="pr">$3.75</span></div>
+          <div class="mrow"><span class="n">Almond Croissant</span><span class="dots"></span><span class="pr">$4.50</span></div>
+          <div class="mrow"><span class="n">Morning Bun <small>cinnamon &amp; orange</small></span><span class="dots"></span><span class="pr">$4.00</span></div>
+          <div class="mrow"><span class="n">Chai Latte</span><span class="dots"></span><span class="pr">$4.75</span></div>
+          <div class="mrow"><span class="n">Matcha</span><span class="dots"></span><span class="pr">$5.00</span></div>
+          <div class="mrow"><span class="n">Hot Chocolate</span><span class="dots"></span><span class="pr">$4.00</span></div>
+        </div>
+      </div>
+
+      <p class="menu-foot">Ask about this week's single-origin &amp; our rotating pastry specials.</p>
+    </div>
+  </section>
+
+  <!-- Story -->
+  <section id="story">
+    <div class="wrap">
+      <div class="story-grid">
+        <div class="story-img">
+          <div class="pic" style="background-image:url('https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=900&q=75')"></div>
+          <div class="est"><span class="n">2016</span><span class="l">Roasting Since</span></div>
+        </div>
+        <div class="story-copy">
+          <span class="script-accent">our story</span>
+          <h2>Started in a garage, still small on purpose.</h2>
+          <p>Ember &amp; Oak began in 2016 with a single drum roaster in a Church Hill garage and a stubborn belief that coffee should feel like a warm room and a slow morning &mdash; never a transaction.</p>
+          <p>We still roast small batches every Tuesday, pull every shot by hand, and know most of our regulars by name (and by order). Pull up a chair, stay a while, and leave a little warmer than you arrived.</p>
+          <div class="story-stats">
+            <div class="s"><div class="n">Weekly</div><div class="l">Small-Batch<br>Roasts</div></div>
+            <div class="s"><div class="n">12+</div><div class="l">Single-Origin<br>Coffees</div></div>
+            <div class="s"><div class="n">7 Days</div><div class="l">Open Every<br>Week</div></div>
+          </div>
+          <div class="sign">The Ember &amp; Oak crew<small>Roasters &amp; Baristas</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Roastery band -->
+  <section class="band">
+    <div class="wrap">
+      <span class="script-accent">slow down</span>
+      <p class="q">Good coffee is patience you can taste.</p>
+      <p class="who">Roasted every Tuesday in Church Hill</p>
+    </div>
+  </section>
+
+  <!-- Visit / Contact -->
+  <section id="visit">
+    <div class="wrap">
+      <div class="sec-head center">
+        <span class="eyebrow">Come In</span>
+        <h2>Visit the Shop</h2>
+        <p>Swing by for a cup, order ahead for pickup, or just say hello &mdash; we'd love to see you.</p>
+      </div>
+
+      <div class="visit-grid">
+        <div class="visit-info">
+          <div class="block">
+            <div class="k">Find Us</div>
+            <div class="big">2401 E Broad Street</div>
+            <p>Church Hill &middot; Richmond, VA 23223</p>
+          </div>
+          <div class="block">
+            <div class="k">Hours</div>
+            <div class="hours">
+              <div class="hr"><span>Monday &ndash; Friday</span><b>7:00a &ndash; 6:00p</b></div>
+              <div class="hr"><span>Saturday</span><b>8:00a &ndash; 5:00p</b></div>
+              <div class="hr"><span>Sunday</span><b>8:00a &ndash; 3:00p</b></div>
+            </div>
+          </div>
+          <div class="block">
+            <div class="k">Say Hello</div>
+            <p><a href="tel:+18045550142">(804) 555-0142</a><br>
+            <a href="mailto:hello@emberandoakcoffee.com">hello@emberandoakcoffee.com</a><br>
+            Catering &amp; wholesale beans available</p>
+          </div>
+        </div>
+
+        <form class="contact-card" onsubmit="event.preventDefault(); this.reset(); alert('Thanks for reaching out! We\'ll get back to you within a day. See you soon.');">
+          <h3>Drop us a line</h3>
+          <p class="fsub">Questions, catering, or just want to chat beans? Send a note.</p>
+          <div class="frow">
+            <div class="fg"><label for="name">Name</label><input id="name" name="name" type="text" required placeholder="Your name"></div>
+            <div class="fg"><label for="email">Email</label><input id="email" name="email" type="email" required placeholder="you@email.com"></div>
+          </div>
+          <div class="fg"><label for="topic">About</label>
+            <select id="topic" name="topic">
+              <option>Just saying hello</option>
+              <option>Order ahead / pickup</option>
+              <option>Catering &amp; events</option>
+              <option>Wholesale beans</option>
+            </select>
+          </div>
+          <div class="fg"><label for="msg">Message</label><textarea id="msg" name="msg" placeholder="How can we help?"></textarea></div>
+          <button type="submit" class="btn btn-solid">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer>
+  <div class="fbar"></div>
+  <div class="wrap foot">
+    <div class="mark">E</div>
+    <div class="b1">Ember &amp; Oak</div>
+    <div class="b2">Coffee Co. &middot; Richmond</div>
+    <p>A small-batch coffee shop &amp; roastery in Church Hill &mdash; house-roasted coffee, fresh pastries, and an unhurried morning.</p>
+    <ul class="fnav">
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#story">Our Story</a></li>
+      <li><a href="#visit">Visit</a></li>
+    </ul>
+    <div class="fcontact">2401 E Broad Street, Richmond, VA 23223 &nbsp;&middot;&nbsp; <a href="tel:+18045550142">(804) 555-0142</a> &nbsp;&middot;&nbsp; <a href="mailto:hello@emberandoakcoffee.com">hello@emberandoakcoffee.com</a></div>
+  </div>
+  <div class="foot-bottom">&copy; 2026 Ember &amp; Oak Coffee Co. &middot; Richmond, Virginia &middot; Stay warm</div>
+</footer>
+
+</body>
+</html>
